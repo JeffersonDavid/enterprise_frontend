@@ -1,0 +1,45 @@
+.secure-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .secure-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px; /* Puedes ajustar este valor según tus necesidades */
+  }
+  
+  .secure-content {
+    text-align: center;
+  }
+  
+  /* Media query para dispositivos móviles */
+  @media screen and (max-width: 768px) {
+    .secure-container {
+      padding: 0 10px; /* Agregar espaciado lateral para evitar que el contenido sea demasiado ancho en dispositivos móviles */
+    }
+  
+    .secure-card {
+      max-width: 100%;
+    }
+  }
+
+
+
+
+
+ #pr_image{
+  height: 100%;
+ }
+
+ .desctext{
+  text-align: start;
+ }
+
+ .fspan{
+  margin-top: 20px;
+ }

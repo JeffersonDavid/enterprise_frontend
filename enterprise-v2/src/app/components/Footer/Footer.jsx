@@ -3,6 +3,7 @@
 import Ws from '../../../../public/images/whatsapp.png';
 import Image from 'next/image';
 import Phone from '../../../../public/images/telephone.png'
+import Pr from '../../../../public/images/priv.png'
 import React from 'react';
 import {useEffect} from 'react';
 
@@ -44,14 +45,19 @@ export default function NavBar() {
             <span className="text-sm text-gray-500 sm:text-center">© 2023 <a href="https://flowbite.com/" className="hover:underline">Pitasol HUB </a>. All Rights Reserved.
             </span>
             <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500">
-                <li>
-                    <a href="#" className="mr-4 hover:underline md:mr-6">Politica de privacidad</a>
+
+                <li className='ftli flex inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-success-700 ring-1 ring-inset ring-success-700/10'>
+                <Image src={Pr} width={20} height={20} alt="Com"/>
+                    <a href="#" className="mr-4 hover:underline ml-2">Politica de privacidad</a>
                 </li>
-                <li className='flex'>
+                <li className='ftli flex inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-success-700 ring-1 ring-inset ring-success-700/10'>
                     <Image src={Phone} width={20} height={20} alt="Com" className=""/>
                     <a href={"tel:"+phoneNumber} className=" mr-4 hover:underline ml-2">Llámanos al {phoneNumber}</a>
+                    
                 </li>
-                <li className='flex'>
+
+
+                <li className='ftli flex inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-success-700 ring-1 ring-inset ring-success-700/10'>
                     <Image src={Ws} width={20} height={20} alt="Com"/>
                     <a href="https://api.whatsapp.com/send/?phone=34674068438&text=Escribenos+tu+consulta+por+aqu%C3%AD...&type=phone_number&app_absent=0" className="mr-4 hover:underline ml-2">Envíanos un Whatsapp </a>
                 </li>

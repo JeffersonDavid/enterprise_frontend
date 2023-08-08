@@ -1,0 +1,6 @@
+.captcha{
+    width: 40%;
+    margin: auto;
+    margin-top: 15%;
+    z-index: 1000 !important;
+  }

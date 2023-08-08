@@ -1,0 +1,25 @@
+.pr-img-cont>img{
+    max-height: 200px;
+}
+.pr-cont{
+    margin: 10px;
+}
+
+@media (max-width: 768px) {
+    .product {
+        max-width: 100%;
+    }
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.product {
+    flex: 1;
+    max-width: auto;
+    margin: 10px;
+    padding: 20px;
+    
+}

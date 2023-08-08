@@ -5,6 +5,8 @@
 @import '../app/components/Nav/navBar.css';
 @import '../app/components/Footer/footer.css';
 @import '../app/components/Product/product.css';
+@import '../app/components/Captcha/captcha.css';
+@import '../app/components/Productdesc/productdesc.css';
 
 
 

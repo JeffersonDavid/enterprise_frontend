@@ -1,0 +1,18 @@
+.sliderbtn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 65%;
+}
+
+.slb-r{
+    position: absolute;
+    right: 0;
+}
+
+.slb-l{
+    position: absolute;
+    left: 0;
+}

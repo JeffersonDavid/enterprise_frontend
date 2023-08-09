@@ -2,9 +2,7 @@
 'use client'
 
 import Product from '../components/Productdesc/Productdesc';
-
 import productData from '../data/data';
-
 
 export default function ordersPage() {
 
@@ -22,7 +20,6 @@ export default function ordersPage() {
                         <Product data={productData().pita_integral}/>
                     </div>
 
-                    
                 </div>
              </div>
     )

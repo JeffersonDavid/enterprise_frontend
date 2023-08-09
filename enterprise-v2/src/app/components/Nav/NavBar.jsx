@@ -1,5 +1,7 @@
 'use client'
 
+import React, { useState,useEffect,useRef } from 'react'; 
+
 import Image from "next/image"
 import Logo from "../../../../public/images/logo.png"
 import Link from "next/link"
@@ -7,7 +9,6 @@ import PitaIcon from "../../../../public/images/pan-de-pita.png"
 import ComunincationIcon from "../../../../public/images/com.png"
 import BoxIcon from "../../../../public/images/box.png"
 import CompanyIcon from "../../../../public/images/panadero.png"
-import React, { useState,useEffect,useRef } from 'react'; 
 
 
 
@@ -35,20 +36,20 @@ export default function NavBar() {
   };
 
 
- 
+  const handleOutsideClick = (event) => {
+    if(!event.target.classList.contains('drsignal')){
+      setdropDownState(false)
+    }
+  };
+
 
   useEffect(() => {
-      
     if(dropDownState){
-
+      document.addEventListener('click', handleOutsideClick);
       dropRef.current.style.display = 'block';
-
     }
-
     if(!dropDownState){
-
       dropRef.current.style.display = 'none';
-
     }
 
   }, [dropDownState]);
@@ -57,7 +58,7 @@ export default function NavBar() {
 return (
 
 <header>
-<nav className="bg-white border-gray-200">
+<nav className="bg-white border border-gray-10 shadow">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
     <Link href="/" className="flex items-center"><Image src={Logo} width={150} height={150} alt="Picture of the author"/>
@@ -87,16 +88,16 @@ return (
               )})
         }
 
-      <div className="linkcontainer">
-            <button onClick={menucontroller} id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto">
-            <Image src={BoxIcon} width={20} height={20} alt="Com"/> Pedidos <svg className="w-5 h-5 ml-1" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg></button>
-                <div ref={dropRef} id="dropdownNavbar" className="z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                          <ul className="py-2 text-sm text-gray-700" aria-labelledby="dropdownLargeButton">
-                            <li key={1}>
-                              <Link href="/blanco" className="block px-4 py-2 hover:bg-gray-100">Blanco</Link>
+      <div className="linkcontainer drsignal">
+            <button onClick={menucontroller} id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto drsignal">
+            <Image src={BoxIcon}  className='drsignal' width={20} height={20} alt="Com"/> Pedidos <svg className="w-5 h-5 ml-1 drsignal" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg></button>
+                <div ref={dropRef} id="dropdownNavbar" className=" drsignal z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                          <ul className="py-2 text-sm text-gray-700 drsignal" aria-labelledby="dropdownLargeButton">
+                            <li key={1} className='drsignal'>
+                              <Link href="/blanco" className="drsignal block px-4 py-2 hover:bg-gray-100 border-gray-10 shadow">Blanco</Link>
                             </li>
-                            <li key={2}>
-                              <Link href="/integral" className="block px-4 py-2 hover:bg-gray-100">Integral</Link>
+                            <li key={2} className='drsignal'>
+                              <Link href="/integral" className="block px-4 py-2 hover:bg-gray-100 drsignal">Integral</Link>
                             </li>
                           </ul>
                 </div>

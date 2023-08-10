@@ -18,4 +18,13 @@ nav{
   #dropdownNavbar{
     position: absolute;
   }
+
+  .mobile_drop{
+    padding: 0px !important;
+    margin: 0px !important;
+  }
+
+  #navbar-default{
+    background: white;
+  }
   

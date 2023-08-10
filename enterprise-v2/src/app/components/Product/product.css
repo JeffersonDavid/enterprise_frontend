@@ -26,10 +26,11 @@
     .secure-card {
       max-width: 100%;
     }
+
+    .product-cont{
+      height: 100%;
+    }
   }
-
-
-
 
 
  #pr_image{
@@ -43,3 +44,5 @@
  .fspan{
   margin-top: 20px;
  }
+
+ 

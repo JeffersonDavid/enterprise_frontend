@@ -1,0 +1,10 @@
+@media (max-width: 700px){
+
+    .product-box{
+      height: 100%;
+    }
+
+    .p-f{
+        margin-top: 20%;
+    }
+  }

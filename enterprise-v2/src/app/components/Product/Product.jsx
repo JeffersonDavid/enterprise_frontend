@@ -29,7 +29,7 @@ let dimnension_bolsa = type === 'blanco' ? prd.pita_blanco.box.weight : prd.pita
 return ( 
 
 
-<div className='secure-container flex justify-center items-center'>
+<div className='product-cont secure-container flex justify-center items-center'>
 
   <a href="#" className="cardlink secure-card bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100">
     <div className="secure-image">

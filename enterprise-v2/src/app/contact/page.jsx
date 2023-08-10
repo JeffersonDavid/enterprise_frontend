@@ -73,10 +73,10 @@ return(
 <Captcha form={form} />
 
     <div className='secure-container flex justify-center items-center'>
-        <div className="w-full max-w-xl" ref={form_ref}>
+        <div className="w-full max-w-xl border" ref={form_ref}>
         
                 <form className="bg-white shadow-md rounded px-8 pt-6 pb-2 mb-1">
-                    <p className='m-3'> Contacto a través de formulario </p>
+                    <p className='m-3 block text-gray font-bold'> Contacto a través de formulario </p>
                     <div className="mb-1">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
                             Nombre y apellidos
@@ -103,7 +103,7 @@ return(
                     </div>              
 
                     <div className="flex items-center justify-between">
-                        <button className="btnbcolor bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={e => SendData(e)}>
+                        <button className="btnbcolor inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" type="button" onClick={e => SendData(e)}>
                             Enviar
                         </button>
                         <p className="text-red-500 text-xs italic"> {validation}  </p>

@@ -28,3 +28,23 @@ nav{
     background: white;
   }
   
+  @media (max-width: 700px) {
+    #dropdownNavbarLink{
+      justify-content: start;
+    }
+      .icon_menu{
+        margin-left: 10px;
+      }
+    
+      .link_responsive{
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Borde inferior elegante */
+        transition: background-color 0.3s;
+        padding: 2px;
+        background: white;
+      }
+
+      .link-navi{
+        width: 100%;
+      }
+  }
+  

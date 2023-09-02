@@ -6,6 +6,7 @@ import Image from 'next/image';
 import dataset from './data'
 import { useState, useEffect } from 'react';
 
+import CustomForm from '../../components/Form/Form'
 
 export default function Product(initialType) {
 
@@ -32,12 +33,24 @@ export default function Product(initialType) {
     setSilderImg(simage)
   };
 
+let fields = [ 
+  { label:'Nombre', type:'text' } ,
+  { label:'email', type:'text' } ,
+  { label:'telefono', type:'text' } ,
+  { label:'cantidad', type:'number' } ,
+  { label:'tipo de pedido', type:'select', options : 'Al por mayor'} ,
+  { label:'Enviar', type:'submit_input'}
+]
+
 return (
 
 
 <div className='m-auto w-[100%]'>
-
 <div className='secure-container flex justify-center items-center'>
+
+<CustomForm data={fields} />
+
+{/* 
 
   <div className="flex product_desc_width_he border border-gray-300 rounded p-2 w-[70%] h-[65%]">
     <div className="w-1/10 p-1 border border-gray-100 rounded m-auto mr-3">
@@ -124,13 +137,13 @@ return (
                         </li>
                       ))
                 }
-         
-             
           </ul>
-
       </div>
     </div>
   </div>
+
+
+*/}
 
 </div>
 </div>

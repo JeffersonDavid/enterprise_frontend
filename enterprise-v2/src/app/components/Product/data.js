@@ -6,6 +6,10 @@ import pitablanco_img from '../../../../public/images/pitablanco.webp'
 
 import pitaint_img from '../../../../public/images/pan-integral.webp'
 
+import boximg from '../../../../public/images/caja_bolsas.jpg'
+
+import single_b from '../../../../public/images/single_pita.jpg'
+
 export default function dataset(){
 
 const product_data = {
@@ -26,7 +30,9 @@ const product_data = {
                 ]
             
         },
-        img:pitaint_img
+        img:pitaint_img,
+        box_img:boximg,
+        singe_pita_img : single_b
 
     },
 
@@ -47,7 +53,9 @@ const product_data = {
             
         },
 
-        img:pitablanco_img
+        img:pitablanco_img,
+        box_img:boximg,
+        singe_pita_img : single_b
     }
    
 }

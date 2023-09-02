@@ -8,19 +8,29 @@ import { useState, useEffect } from 'react';
 
 
 export default function Product(initialType) {
-  const d = dataset();
 
+  const d = dataset();
 
   let type_ = initialType.type
   const [productType, setType] = useState(type_);
+
   const [product_data, setProduct_data] = useState( productType != 'blanco' ? d.integral : d.blanco );
+
   const selectedData = productType != 'blanco' ? d.integral : d.blanco;
+
+  const [sliderImg, setSilderImg ] =   useState(selectedData.img) 
+ 
 
   useEffect(() => {
     setProduct_data(selectedData);
-      console.log(selectedData)
+    setSilderImg(selectedData.img)
+
   }, [productType]);
 
+
+  const handleImg = (simage) => {
+    setSilderImg(simage)
+  };
 
 return (
 
@@ -32,16 +42,24 @@ return (
   <div className="flex product_desc_width_he border border-gray-300 rounded p-2 w-[70%] h-[65%]">
     <div className="w-1/10 p-1 border border-gray-100 rounded m-auto mr-3">
       <div className='p-1'>
-        <Image src={selectedData.img} alt="Imagen 1" width={120} height={120} className='border-b border-gray-300 rounded min_pr_image' />
+
+        <button onClick={() => handleImg(selectedData.box_img)}>
+        <Image src={selectedData.box_img} alt="Imagen 1" width={140} height={140} className='border border-gray-300 rounded min_pr_image' />
+        </button>
         <br></br>
-        <Image src={selectedData.img} alt="Imagen 2" width={120} height={120} className='min_pr_image' />
+        <button onClick={() => handleImg(selectedData.img)}>
+        <Image src={selectedData.img} alt="Imagen 2" width={140} height={140} className='min_pr_image border border-gray-300 rounded' />
+        </button>
         <br></br>
-        <Image src={selectedData.img} alt="Imagen 3" width={120} height={120} className='min_pr_image' />
+        <button onClick={() => handleImg(selectedData.singe_pita_img)}>
+        <Image src={selectedData.singe_pita_img} alt="Imagen 3" width={140} height={140} className='min_pr_image border border-gray-300 rounded' />
+        </button>
+
       </div>
     </div>
 
     <div className="col2img w-3/10 p-1 flex flex-col justify-between m-auto h-full mr-2">
-      <Image src={selectedData.img} alt="Imagen 4" width={500} height={500} className='border border-gray-200 rounded med_pr_image object-cover' />
+      <Image src={sliderImg} alt="Imagen 4" width={500} height={500} className='m-auto med_pr_image object-cover'/>
       <button className="btnbcolor inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" type="button" onClick={e => SendData(e)}>
         <p>Pídelo ahora</p>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="ml-auto">

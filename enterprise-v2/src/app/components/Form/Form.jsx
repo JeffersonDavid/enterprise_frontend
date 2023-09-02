@@ -47,7 +47,7 @@ export default function CustomForm(inputs) {
  
 return(
     <form className="mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
-
+    <p className='m-3 block text-gray font-bold'> Realiza un pedido </p>
     {
         inputs_.map((item, index) =>(
 

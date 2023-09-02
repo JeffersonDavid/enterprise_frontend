@@ -38,6 +38,7 @@ let fields = [
   { label:'email', type:'text' } ,
   { label:'telefono', type:'text' } ,
   { label:'cantidad', type:'number' } ,
+  { label:'Direccion de entrega', type:'text' } ,
   { label:'tipo de pedido', type:'select', options : 'Al por mayor'} ,
   { label:'Enviar', type:'submit_input'}
 ]

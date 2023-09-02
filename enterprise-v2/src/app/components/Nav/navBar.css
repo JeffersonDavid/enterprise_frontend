@@ -3,6 +3,7 @@ nav{
     top: 0; /* Position the navbar at the top of the page */
     width: 100%; /* Full width */
     height: 90px;
+    z-index: 99999;
   }
 
   .link-container{
@@ -46,12 +47,19 @@ nav{
       .link-navi{
         width: 100%;
       }
+
+      #mobile_menu{
+        height: 350px;
+      }
   }
 
   @media (min-width: 700px) {
     #navbar-default{
       display: block !important;
     }
+
+    
   }
  
   
+

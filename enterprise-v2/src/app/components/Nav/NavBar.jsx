@@ -18,6 +18,8 @@ import Close from "../../../../public/images/close.png"
   
 
 export default function NavBar() {
+
+  const super_container = document.querySelector('.super-container')
  
   const pages = [
     {label:'Nosotros', source:'/', iconSrc: <Image src={CompanyIcon} width={30} height={30} alt="Pitasol"/>},
@@ -56,20 +58,23 @@ export default function NavBar() {
       document.addEventListener('click', handleOutsideClick);
       dropRef.current.style.display = 'block';
     }
+
     if(!dropDownState){
       dropRef.current.style.display = 'none';
     }
 
     if(mobile_menu_state){
-      menu_mobile_ref.current.style.display = 'block'
+      menu_mobile_ref.current.style.display = 'block'  
+      document.body.style.overflowX = "hidden";   
     }
 
 
     if(! mobile_menu_state){
       menu_mobile_ref.current.style.display = 'none'
+      document.body.style.overflowX = "auto";
     }
 
-    console.log('esta del menu mobile')
+    console.log('estado del menu mobile')
     console.log(mobile_menu_state)
 
 
@@ -110,7 +115,7 @@ return (
     </button>
 
     <div className="hidden w-full md:block md:w-auto" id="navbar-default" ref={ menu_mobile_ref }>
-      <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
+      <ul id='mobile_menu' className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white">
 
         {
             pages.map((element,index) => {
@@ -145,6 +150,8 @@ return (
   </div>
 </nav>
 </header>
+
+
 )
 
 

@@ -7,7 +7,7 @@ import baclava_img from '../../../public/images/baclava.jpg'
 import Link from 'next/link';
 import Carton from '../../../public/images/carton.png'
 
-export default function productData(){
+export default function productData_(){
 
     let products = { 
 

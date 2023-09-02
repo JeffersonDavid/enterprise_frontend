@@ -7,72 +7,87 @@ import Image from 'next/image';
 
 import productData from '../../data/data';
 
-export default function Product(type) {
-type = type.type
+import dataset from './data'
 
-let prd = productData();
+import ComunincationIcon from "../../../../public/images/com.png"
 
-let src_img = type === 'blanco' ? prd.pita_blanco.src_img : prd.pita_integral.src_img
-
-let title = type === 'blanco' ? prd.pita_blanco.title : prd.pita_integral.title
-
-let desc = type === 'blanco' ? prd.pita_blanco.shortdesc : prd.pita_integral.shortdesc
-
-let quantity = type === 'blanco' ? prd.pita_blanco.box.quantit : prd.pita_integral.box.quantit
-
-let duration = type === 'blanco'? prd.pita_blanco.duration : prd.pita_integral.duration
-
-let storage = prd.storage
-
-let dimnension_bolsa = type === 'blanco' ? prd.pita_blanco.box.weight : prd.pita_integral.box.weight
- 
-return ( 
+import { useState, useEffect } from 'react';
 
 
-<div className='product-cont secure-container flex justify-center items-center'>
+export default function Product(initialType) {
+  const d = dataset();
 
-  <a href="#" className="cardlink secure-card bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100">
-    <div className="secure-image">
 
-        <Image id='pr_image' src={src_img} alt='Pita blanco'></Image>
-     
+  let type_ = initialType.type
+  const [productType, setType] = useState(type_);
+  const [product_data, setProduct_data] = useState( productType != 'blanco' ? d.integral : d.blanco );
+  const selectedData = productType != 'blanco' ? d.integral : d.blanco;
+
+  useEffect(() => {
+    setProduct_data(selectedData);
+      console.log(selectedData)
+  }, [productType]);
+
+
+return (
+
+
+<div className='m-auto w-[100%]'>
+
+<div className='secure-container flex justify-center items-center'>
+
+  <div className="flex product_desc_width_he border border-gray-300 rounded p-2 w-[70%] h-[60%]">
+    <div className="w-1/10 p-1 border border-gray-100 rounded m-auto mr-3">
+      <div className='p-1'>
+        <Image src={selectedData.features.generic.img} alt="Imagen 1" width={120} height={120} className='border-b border-gray-300 rounded min_pr_image' />
+        <br></br>
+        <Image src={selectedData.features.generic.img} alt="Imagen 2" width={120} height={120} className='min_pr_image' />
+        <br></br>
+        <Image src={selectedData.features.generic.img} alt="Imagen 3" width={120} height={120} className='min_pr_image' />
+      </div>
     </div>
-    <div className="secure-content p-4">
-      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">{title}</h5>
-      <p className="mb-3 font-normal text-gray-700">
-        {desc}
 
-        <br></br>
-
-        <span className="fspan inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">- Bolsas en caja : {quantity}</span>
-
-        <br></br>
-
-        
-        <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">- Panes en bolsa : {quantity}</span>
-        <br></br>
-
-        <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">- Duración : {duration}</span>
-        <br></br>
-
-        <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
-        - Almacenamiento : {storage}</span>
-        <br></br>
-
-        <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
-        - Dimension bolsa : {dimnension_bolsa}</span>
-
-      </p>
+    <div className="col2img w-3/10 p-1 flex flex-col justify-between m-auto h-full mr-2">
+      <Image src={selectedData.features.generic.img} alt="Imagen 4" width={500} height={500} className='border border-gray-200 rounded med_pr_image object-cover' />
     </div>
-  </a>
+
+    <div className="w-[80%] md:w-[90%] p-2 border border-gray-100 rounded descbox">
+      <div className="h-[auto] bg-gray-50 p-3 flex flex-col justify-between">
 
 
+      
+          <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
+
+            {
+                  selectedData.features.bag.map((item, index) =>
+                   (
+                      <li  key={index} className="">
+                        <div className="flex items-center space-x-1 mt-1 mb-1">
+                          <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                {item.key}
+                              </p>
+                              <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                              {item.value}
+                              </p>
+                          </div>
+                          <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"> 
+                          ?
+                          </div>
+                        </div>
+                    </li>
+                  ))
+            }
+             
+          </ul>
+
+      </div>
+    </div>
+  </div>
+
+</div>
 </div>
 
 
 
-)
-
-
-}
-  
+)}

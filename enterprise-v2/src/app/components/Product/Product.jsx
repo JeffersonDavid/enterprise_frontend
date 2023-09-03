@@ -43,8 +43,8 @@ let fields={
     { label:'cantidad', type:'number',name:'quantity',  required: true }, 
     { label:'Direccion de entrega', type:'text',name:'address', required: true },
     { label:'tipo de pedido', type:'select', name:'type', options : ['Al por mayor'], required: true },
-    { label:'Enviar', type:'submit_input'}
-  ]
+  ],
+  form_title:'Realiza un pedido'
  
 } 
  

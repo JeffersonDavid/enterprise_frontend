@@ -33,15 +33,22 @@ export default function Product(initialType) {
     setSilderImg(simage)
   };
 
-let fields = [ 
-  { label:'Nombre', type:'text' } ,
-  { label:'email', type:'text' } ,
-  { label:'telefono', type:'text' } ,
-  { label:'cantidad', type:'number' } ,
-  { label:'Direccion de entrega', type:'text' } ,
-  { label:'tipo de pedido', type:'select', options : 'Al por mayor'} ,
-  { label:'Enviar', type:'submit_input'}
-]
+
+let fields={
+
+  form_fields:[
+    { label:'Nombre', type:'text',  name:'name', required: true},
+    { label:'email', type:'text',name:'email',required: true },
+    { label:'telefono', type:'text', required: true },
+    { label:'cantidad', type:'number',name:'quantity',  required: true }, 
+    { label:'Direccion de entrega', type:'text',name:'address', required: true },
+    { label:'tipo de pedido', type:'select', name:'type', options : ['Al por mayor'], required: true },
+    { label:'Enviar', type:'submit_input'}
+  ]
+ 
+} 
+ 
+
 
 return (
 

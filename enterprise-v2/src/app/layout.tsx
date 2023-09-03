@@ -23,11 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar/> <NavBar/>
+        <NavBar/>
           <div>
              {children}
           </div>  
-       
         <Footer_comp/>
       </body>
     </html>

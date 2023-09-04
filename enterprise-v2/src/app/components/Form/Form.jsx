@@ -1,16 +1,19 @@
 'use client'
 
-import { data } from 'autoprefixer';
-import { Input } from 'postcss';
 import React, { useState,useEffect,useRef } from 'react';
+import Captcha from '../Captcha/Captcha';
+import dataset from '../Product/data';
 
 
 const submit_id = 'submit_input'
 
 export default function CustomForm(inputs) {
 
+    const [activeCaptcha, setactiveCaptcha] = useState(false);
     const valiadtionRef = useRef(null);
+    const formRef = useRef(null);
     const [valiadtionMsg, setvaliadtionMsg] = useState('');
+    const [inputDataset, setinputDataset] = useState([]);
 
     const defineInputType = (item) => {
         let type = item.type
@@ -51,11 +54,8 @@ export default function CustomForm(inputs) {
 
 
     const submitForm = (ev) => {
-
         let dataset = [];
-
         ev.preventDefault();
-
         inputs.data.form_fields.forEach(element => {
                 let input = document.getElementById(`${element.name}`);   
                 if(input != null && input != undefined){
@@ -68,23 +68,38 @@ export default function CustomForm(inputs) {
        
         const has_empty_inputs = dataset.filter(item => item.value === '' || item.value === null);
         if ((has_empty_inputs.length) > 0) {
-
             const namesString = has_empty_inputs.map(item => item.label).join(', ');
             setvaliadtionMsg(namesString)
             valiadtionRef.current.style.display = 'block'
         }else{
 
+            setinputDataset(dataset)
             setvaliadtionMsg('')
             valiadtionRef.current.style.display = 'none'
-
+            setactiveCaptcha(true)
         }
-
-        
     };
  
-    return (
+    useEffect(() => { 
+        if(activeCaptcha){
 
-    <form className="mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
+            inputDataset.st = true
+            setinputDataset(inputDataset);
+            formRef.current.style.display ='none'
+
+        }else{
+            inputDataset.st = false
+            formRef.current.style.display ='block'
+            setinputDataset(inputDataset);
+        }
+    }, [activeCaptcha]);
+
+
+    return (
+    <div className='w-full flex justify-center'>
+    <Captcha form={inputDataset} />
+
+    <form ref={formRef} className="mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
             <p className='m-3 block text-gray font-bold'> {inputs.data.form_title} </p>
             {
                     inputs.data.form_fields.map((item, index) =>(
@@ -100,8 +115,9 @@ export default function CustomForm(inputs) {
 
                         <span ref={valiadtionRef} class="valiadtionRef ml-5 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Por favor, rellene los campos: {valiadtionMsg}</span>
                     </div>
-            
     </form>
+
+    </div>
 
 )}
 

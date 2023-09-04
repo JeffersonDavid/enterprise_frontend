@@ -1,5 +1,5 @@
 'use client'
-import Captcha from '../components/Captcha/Captcha';
+import Captcha from '../components/Captcha/Captcha_no';
 import React from 'react';
 import { useRef } from 'react';
 

@@ -9,60 +9,93 @@ import C1image from '../../../../public/images/perro.jpg'
 import C2image from '../../../../public/images/barco.jpg'
 import C3image from '../../../../public/images/silueta.jpg'
 import C4image from '../../../../public/images/señal.jpg'
+import Fetcher from './Fetcher'
 
 
 export default function Captcha({form}) {
 
     const [captchastatus, setStatus] = useState(false);
 
+    const [visibility,setvisibility] = useState('none');
+
     const captchaRef = useRef(null);
 
+    const [validForm , setvalidForm ] = useState({captcha:false});
+
+
     const [captchaImgs, setcaptchaImgs] = useState([
-        C1image,
-        C2image,
-        C3image,
-        C4image
+
+         { source:C1image, label:' Un perro'},
+         { source:C2image, label:' Un barco'},
+         { source:C3image, label:' Una silueta'},
+         { source:C4image, label:' Una señal de trafico'},
     ]);
   
-    //const [target, setTarget] = useState( captchaImgs[Math.floor(Math.random() * captchaImgs.length)] );
+    let rand = captchaImgs[Math.floor(Math.random() * captchaImgs.length)]
+    const [target, setTarget] = useState(rand);
 
     useEffect(() => {
     setStatus(form.st)
-    console.log('status')
-    console.log(captchastatus)
       
       if(form.st===true){
         captchaRef.current.style.display = 'block';
+        
       }else{
         captchaRef.current.style.display = 'none';
       }
 
+      if(captchastatus){
+        captchaRef.current.style.display = 'none';
+        console.log('setea patcha true')
+        setvalidForm({captcha:true, data: [...form]})
+
+        console.log(validForm)
+        console.log(form)
+      }
+
+      
      
-    }, [form.st]);
+    }, [form.st,captchastatus]);
+
+    
+    const processCaptcha = (data) => {
+      if(data === target){
+        setvisibility('none')
+        setStatus(true)
+
+
+      }else{
+        setvisibility('block')
+       setStatus(false)
+      }
+  
+    }
   
 
-
-
-
-
-
-
 return (
-<div ref={captchaRef}>  
-    <div>
-      <h1>Galería de Imágenes (2x2)</h1>
-      <div className="grid grid-cols-2 gap-4">
+
+<div>
+<Fetcher validForm = {validForm} />
+
+<div ref={captchaRef} className="flex items-center m-auto w-2/5">
+    <span className=" flex bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+        Por favor seleccione llla imagen que más se parezca a <p className="ml-1 border-b border-blue-500">{target.label}</p>
+    </span>
+    <div className="flex flex-wrap justify-between border p-1 w-full">
         {captchaImgs.map((fila, rowIndex) => (
-          <div key={rowIndex} className="flex">
-         
-              <div key={rowIndex} className="w-full">
-                <Image src={fila}/>
-              </div>
-         
-          </div>
+            <div className="border w-1/2 p-1" key={rowIndex}>
+              <button onClick={() => processCaptcha(fila)}>
+                  <Image src={fila.source} alt={`Imagen ${rowIndex}`} className="w-full h-full object-cover" />
+              </button>
+              
+            </div>
         ))}
-      </div>
     </div>
+
+    <span style={{display:visibility}} className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-30">
+    imagen seleccionada incorrecta, por favor seleccione {target.label} </span>
+</div>
+
 </div>
 
 )}

@@ -15,6 +15,8 @@ export default function CustomForm(inputs) {
     const [valiadtionMsg, setvaliadtionMsg] = useState('');
     const [inputDataset, setinputDataset] = useState([]);
 
+    const [formStatus, setformStatus] = useState(false); 
+
     const defineInputType = (item) => {
         let type = item.type
         let input_class = 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
@@ -68,9 +70,11 @@ export default function CustomForm(inputs) {
        
         const has_empty_inputs = dataset.filter(item => item.value === '' || item.value === null);
         if ((has_empty_inputs.length) > 0) {
+
             const namesString = has_empty_inputs.map(item => item.label).join(', ');
             setvaliadtionMsg(namesString)
             valiadtionRef.current.style.display = 'block'
+
         }else{
 
             setinputDataset(dataset)
@@ -83,6 +87,7 @@ export default function CustomForm(inputs) {
     useEffect(() => { 
         if(activeCaptcha){
 
+            setformStatus(true);
             inputDataset.st = true
             setinputDataset(inputDataset);
             formRef.current.style.display ='none'
@@ -97,7 +102,7 @@ export default function CustomForm(inputs) {
 
     return (
     <div className='w-full flex justify-center'>
-    <Captcha form={inputDataset} />
+    <Captcha form ={inputDataset} formStatus={formStatus} />
 
     <form ref={formRef} className="mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
             <p className='m-3 block text-gray font-bold'> {inputs.data.form_title} </p>

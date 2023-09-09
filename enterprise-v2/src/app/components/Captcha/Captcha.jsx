@@ -12,17 +12,14 @@ import C4image from '../../../../public/images/señal.jpg'
 import Fetcher from './Fetcher'
 
 
-export default function Captcha({form}) {
+export default function Captcha(props) {
+
+    const { form, formStatus} = props;
 
     const [captchastatus, setStatus] = useState(false);
-
-    const [visibility,setvisibility] = useState('none');
-
+    const [visibility, setvisibility] = useState('none');
     const captchaRef = useRef(null);
-
-    const [validForm , setvalidForm ] = useState({captcha:false});
-
-
+    
     const [captchaImgs, setcaptchaImgs] = useState([
 
          { source:C1image, label:' Un perro'},
@@ -33,52 +30,41 @@ export default function Captcha({form}) {
   
     let rand = captchaImgs[Math.floor(Math.random() * captchaImgs.length)]
     const [target, setTarget] = useState(rand);
-
+    
     useEffect(() => {
-    setStatus(form.st)
-      
-      if(form.st===true){
+    if(formStatus === true){        
         captchaRef.current.style.display = 'block';
-        
+      }else{
+        captchaRef.current.style.display = 'none';
+      }  
+      
+      if( captchastatus && formStatus ){
+        captchaRef.current.style.display = 'none';
       }else{
         captchaRef.current.style.display = 'none';
       }
 
-      if(captchastatus){
-        captchaRef.current.style.display = 'none';
-        console.log('setea patcha true')
-        setvalidForm({captcha:true, data: [...form]})
-
-        console.log(validForm)
-        console.log(form)
-      }
-
-      
-     
-    }, [form.st,captchastatus]);
+    }, [formStatus,captchastatus]);
 
     
     const processCaptcha = (data) => {
       if(data === target){
         setvisibility('none')
         setStatus(true)
-
-
-      }else{
-        setvisibility('block')
-       setStatus(false)
+      }else{   
+          setvisibility('block')
+          setStatus(false)
       }
-  
     }
-  
 
 return (
 
 <div>
-<Fetcher validForm = {validForm} />
+
+<Fetcher validForm = {form} captchastatus = {captchastatus } />
 
 <div ref={captchaRef} className="flex items-center m-auto w-2/5">
-    <span className=" flex bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+    <span className="m-2 flex bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
         Por favor seleccione llla imagen que más se parezca a <p className="ml-1 border-b border-blue-500">{target.label}</p>
     </span>
     <div className="flex flex-wrap justify-between border p-1 w-full">
@@ -92,7 +78,7 @@ return (
         ))}
     </div>
 
-    <span style={{display:visibility}} className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-30">
+    <span style={{display:visibility}} className="m-2 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-30">
     imagen seleccionada incorrecta, por favor seleccione {target.label} </span>
 </div>
 

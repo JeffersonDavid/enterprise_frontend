@@ -16,7 +16,6 @@ const [status, setStatus_] = React.useState('none');
 console.log('entra form')
 console.log(form)
 
-const [status, setStatus_] = React.useState('none');
 const [statuscaptcha, setStatuscaptcha] = React.useState('block');
 const [statusLoader, setStatusLoader] = React.useState('none');
 const [statusApi, setStatusApi] = React.useState('');

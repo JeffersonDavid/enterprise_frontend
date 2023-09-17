@@ -57,12 +57,19 @@ export default function CustomForm(inputs) {
 
     const submitForm = (ev) => {
         let dataset = [];
+        dataset.fields = [];
+        dataset.target = inputs.data.form_target;
+        dataset.method = inputs.data.form_method;
+
         ev.preventDefault();
         inputs.data.form_fields.forEach(element => {
                 let input = document.getElementById(`${element.name}`);   
                 if(input != null && input != undefined){
                     if(element.required === true ){
                         dataset.push({ name:element.name , value: input.value, label:element.label })
+                        let dynamicField = {};
+                        dynamicField[element.name] = input.value;
+                        dataset.fields.push(dynamicField);
                     }
                 }
             
@@ -81,23 +88,28 @@ export default function CustomForm(inputs) {
             setvaliadtionMsg('')
             valiadtionRef.current.style.display = 'none'
             setactiveCaptcha(true)
+            
         }
     };
  
     useEffect(() => { 
-        if(activeCaptcha){
 
+        console.log('use effect logger')
+        console.log('captcha status '+ activeCaptcha )
+
+        if(activeCaptcha){
             setformStatus(true);
             inputDataset.st = true
             setinputDataset(inputDataset);
             formRef.current.style.display ='none'
 
         }else{
+          
             inputDataset.st = false
             formRef.current.style.display ='block'
             setinputDataset(inputDataset);
         }
-    }, [activeCaptcha]);
+    }, [activeCaptcha,formStatus]);
 
 
     return (
@@ -109,8 +121,8 @@ export default function CustomForm(inputs) {
             {
                     inputs.data.form_fields.map((item, index) =>(
 
-                    <div class="mb-2 flex" key={index}>
-                        { item.type != submit_id ?  <label class="clabel block text-gray-700 text-sm font-bold mb-2" for={item.label}>{item.label}</label> : null }
+                    <div className="mb-2 flex" key = {index} >
+                        { item.type != submit_id ?  <label className="clabel block text-gray-700 text-sm font-bold mb-2">{item.label}</label> : null }
                         {defineInputType(item)}
                     </div>
             ))}
@@ -118,7 +130,7 @@ export default function CustomForm(inputs) {
                     <div className='flex'>
                         <button  onClick={e => submitForm(e)} name='submit' id='submit_btn' type='submit' className="btnbcolor inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">Enviar</button>
 
-                        <span ref={valiadtionRef} class="valiadtionRef ml-5 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Por favor, rellene los campos: {valiadtionMsg}</span>
+                        <span ref={valiadtionRef} className="valiadtionRef ml-5 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Por favor, rellene los campos: {valiadtionMsg}</span>
                     </div>
     </form>
 

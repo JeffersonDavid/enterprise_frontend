@@ -13,9 +13,7 @@ import Fetcher from './Fetcher'
 
 
 export default function Captcha(props) {
-
     const { form, formStatus} = props;
-
     const [captchastatus, setStatus] = useState(false);
     const [visibility, setvisibility] = useState('none');
     const captchaRef = useRef(null);
@@ -31,17 +29,26 @@ export default function Captcha(props) {
     let rand = captchaImgs[Math.floor(Math.random() * captchaImgs.length)]
     const [target, setTarget] = useState(rand);
     
+
     useEffect(() => {
-    if(formStatus === true){        
-        captchaRef.current.style.display = 'block';
-      }else{
-        captchaRef.current.style.display = 'none';
-      }  
+
+      console.log('use effect logger captcha')
+      console.log('captcha formStatus '+ formStatus )
+
+      if(formStatus === true){        
+          captchaRef.current.style.display = 'block';
+      }
       
+      if(formStatus === false){
+          captchaRef.current.style.display = 'none';
+      }  
+        
       if( captchastatus && formStatus ){
         captchaRef.current.style.display = 'none';
-      }else{
-        captchaRef.current.style.display = 'none';
+      }
+
+      if( captchastatus === false && formStatus === false ){
+          captchaRef.current.style.display = 'none';
       }
 
     }, [formStatus,captchastatus]);

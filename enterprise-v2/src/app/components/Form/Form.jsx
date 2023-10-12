@@ -94,9 +94,6 @@ export default function CustomForm(inputs) {
  
     useEffect(() => { 
 
-        console.log('use effect logger')
-        console.log('captcha status '+ activeCaptcha )
-
         if(activeCaptcha){
             setformStatus(true);
             inputDataset.st = true

@@ -32,9 +32,6 @@ export default function Captcha(props) {
 
     useEffect(() => {
 
-      console.log('use effect logger captcha')
-      console.log('captcha formStatus '+ formStatus )
-
       if(formStatus === true){        
           captchaRef.current.style.display = 'block';
       }

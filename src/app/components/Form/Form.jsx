@@ -33,6 +33,7 @@ export default function CustomForm(inputs) {
                 />
               );
             case 'select':
+
               return (
                 <select className={input_class} id={item.name}>
                   { item.options.map((item, index) =>(
@@ -40,6 +41,14 @@ export default function CustomForm(inputs) {
                   ))}
                 </select>
               );
+
+            case 'text_area':
+                return ( <textarea className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none focus:ring focus:border-blue-300" rows="2" 
+                placeholder={item.placeholder}
+                name={item.name}
+                id={item.id}
+                ></textarea> );
+
             default:
               return (
                 <input

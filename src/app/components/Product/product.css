@@ -1,20 +1,20 @@
 .secure-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.secure-content {
+  text-align: center;
+}
+
+/* Media query para dispositivos móviles */
+@media screen and (max-width: 768px) {
+  .secure-container {
+    padding: 0 10px; /* Agregar espaciado lateral para evitar que el contenido sea demasiado ancho en dispositivos móviles */
   }
-  
-  .secure-content {
-    text-align: center;
-  }
-  
-  /* Media query para dispositivos móviles */
-  @media screen and (max-width: 768px) {
-    .secure-container {
-      padding: 0 10px; /* Agregar espaciado lateral para evitar que el contenido sea demasiado ancho en dispositivos móviles */
-    }
-  
-  }
+
+}
 
 

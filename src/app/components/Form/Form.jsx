@@ -14,8 +14,9 @@ export default function CustomForm(inputs) {
     const formRef = useRef(null);
     const [valiadtionMsg, setvaliadtionMsg] = useState('');
     const [inputDataset, setinputDataset] = useState([]);
-
     const [formStatus, setformStatus] = useState(false); 
+
+    const [inputPhoneValue, setinputPhoneValue] = useState('');
 
     const defineInputType = (item) => {
         let type = item.type
@@ -32,6 +33,19 @@ export default function CustomForm(inputs) {
                   placeholder={item.label}
                 />
               );
+            case 'phone':
+              return (
+                  <input
+                    id={item.name}
+                    className={input_class}
+                    name={item.name}
+                    type={'text'}
+                    placeholder={item.label}
+                    onChange={validatePhone}
+                    value={inputPhoneValue}
+                  />
+              );
+
             case 'select':
 
               return (
@@ -64,6 +78,17 @@ export default function CustomForm(inputs) {
 
 
 
+
+    const validatePhone = (event) => {
+      const newValue = event.target.value;
+  
+      // Validar que el nuevo valor sea un número
+      if (/^\d*$/.test(newValue)) {
+        setinputPhoneValue(newValue);
+      }
+    };
+
+    
     const submitForm = (ev) => {
         let dataset = [];
         dataset.fields = [];

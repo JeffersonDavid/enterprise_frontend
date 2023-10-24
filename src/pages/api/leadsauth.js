@@ -19,15 +19,15 @@ export default async function handler(req, res) {
 
 async function fetchAuth() {
 
-    const url = 'http://127.0.0.1:8000/api/v1/token';
+    const url = 'http://localhost:8080/api/v1/token';
 
-    const requestOptions = {method: 'POST', headers: {'Content-Type': 'application/json','Authorization': generateBasicToken()}, body: null };
+    const requestOptions = { method: 'POST', headers: {'Content-Type': 'application/json','Authorization': generateBasicToken()}, body: null };
     
     try {
 
           const response = await fetch(url, requestOptions);
 
-          if (!response.ok) {throw new Error('Error en la solicitud')}      
+          if (!response.ok) {throw new Error('Error en la solicitud de autentificacion')}      
           const responseData = await response.json();
 
           console.log('BACKEND AUTH:', responseData);

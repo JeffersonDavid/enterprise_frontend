@@ -47,8 +47,10 @@ export default function Fetcher(props) {
           body: JSON.stringify(data)
         };
 
-        console.log('request options')
-        console.log(requestOptions)
+       // console.log('request options')
+       // console.log(requestOptions)
+       console.log('---------- auth from backend ------------')
+       console.log(token)
         
         try {
 
@@ -59,7 +61,7 @@ export default function Fetcher(props) {
               
               console.log(response)
               const responseData = await response.json();
-              console.log('Respuesta:', responseData);
+              console.log('Respuesta recibida de backend:', responseData);
 
         } catch (error) {
               console.error('Error:', error.message);

@@ -5,9 +5,9 @@ export default function contactPage() {
 
 
   const formData = {
-    form_target: '/submit',
+    form_target: 'http://localhost:8080/api/v1/orders',
     form_method: 'POST',
-    form_title: 'Mi formulario de ejemplo',
+    form_title: 'Formulario de contacto',
     form_fields: [
       {
         name: 'name',
@@ -23,7 +23,7 @@ export default function contactPage() {
       },
       {
         name: 'phone',
-        type: 'text',
+        type: 'phone',
         label: 'Teléfono',
         required: true,
       },
@@ -40,7 +40,7 @@ export default function contactPage() {
 
   return (
     <div className='product-box secure-container flex justify-center items-center' > 
-    <FormComponent data={formData} />
+          <FormComponent data={formData} />
     </div>)
 
 

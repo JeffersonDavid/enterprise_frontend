@@ -32,7 +32,8 @@ const product_data = {
         },
         img:pitaint_img,
         box_img:boximg,
-        singe_pita_img : single_b
+        singe_pita_img : single_b,
+        type : 2
 
     },
 
@@ -55,8 +56,12 @@ const product_data = {
 
         img:pitablanco_img,
         box_img:boximg,
-        singe_pita_img : single_b
-    }
+        singe_pita_img : single_b,
+        type : 1
+    },
+  
+
+
    
 }
 

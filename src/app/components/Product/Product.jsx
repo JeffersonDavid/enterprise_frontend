@@ -49,21 +49,29 @@ return (
 
   <div className="flex product_desc_width_he border border-gray-300 rounded p-2 w-[70%] h-[65%]">
     <div className="w-1/10 p-1 border border-gray-100 rounded m-auto mr-3">
-      <div className='p-1'>
 
-        <button onClick={() => handleImg(selectedData.box_img)}>
-        <Image src={selectedData.box_img} alt="Imagen 1" width={140} height={140} className='border border-gray-300 rounded min_pr_image' />
-        </button>
-        <br></br>
-        <button onClick={() => handleImg(selectedData.img)}>
-        <Image src={selectedData.img} alt="Imagen 2" width={140} height={140} className='min_pr_image border border-gray-300 rounded' />
-        </button>
-        <br></br>
-        <button onClick={() => handleImg(selectedData.singe_pita_img)}>
-        <Image src={selectedData.singe_pita_img} alt="Imagen 3" width={140} height={140} className='min_pr_image border border-gray-300 rounded' />
-        </button>
+        <div className='p-1'>
+          <button onClick={() => handleImg(selectedData.box_img)}>
+            <div className='image-container'>
+              <Image src={selectedData.box_img} alt="Imagen 1" className='border border-gray-300 rounded min_pr_image' />
+            </div>
+          </button>
+          <br></br>
+          <button onClick={() => handleImg(selectedData.img)}>
+            <div className='image-container'>
+              <Image src={selectedData.img} alt="Imagen 2" className='min_pr_image border border-gray-300 rounded' />
+            </div>
+          </button>
+          <br></br>
+          <button onClick={() => handleImg(selectedData.singe_pita_img)}>
+            <div className='image-container'>
+              <Image src={selectedData.singe_pita_img} alt="Imagen 3" className='min_pr_image border border-gray-300 rounded'  style={{ width: '140px', height: '140px' }}/>
+            </div>
+          </button>
+    </div>
 
-      </div>
+
+
     </div>
 
     <div className="col2img w-3/10 p-1 flex flex-col justify-between m-auto h-full mr-2">
@@ -83,56 +91,48 @@ return (
       <div className="h-[auto] bg-gray-50 p-3 flex flex-col justify-between">
 
 
-      
-          <ul className="max-w-md divide-y divide-gray-200 dark:divide-gray-700">
-                
-                 {
-                      selectedData.features.generic.map((item, index) =>
-                      (
-                          <li  key={index} className="">
-                            <div className="flex items-center space-x-1 mt-1 mb-1">
-                              <div className="flex-1 min-w-0">
-                                  <p className="text-xs font-medium text-gray-900 truncate dark:text-white">
-                                    {item.key}
-                                  </p>
-                                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                                  {item.value}
-                                  </p>
-                              </div>
-                              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">  
-                              </div>
-                            </div>
-                        </li>
-                      ))
 
-                  }
+          <ul className="max-w-md divide-y divide-gray-200 gray:divide-gray-700">
+            {selectedData.features.generic.map((item, index) => (
+              <li key={index} className="border-none">
+                <div className="flex items-center space-x-4 mt-4 mb-4">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate dark:text-black">
+                      {item.key}
+                    </p>
+                    <p className="text-xs text-gray-500 truncate dark:text-gray-400">
+                      {item.value}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))}
 
-                  {
-                      selectedData.features.bag.map((item, index) =>
-                      (
-                          <li  key={index} className="">
-                            <div className="flex items-center space-x-1 mt-1 mb-1">
-                              <div className="flex-1 min-w-0">
-                                  <p className="text-xs font-medium text-gray-900 truncate dark:text-white">
-                                    {item.key}
-                                  </p>
-                                  <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                                  {item.value}
-                                  </p>
-                              </div>
-                              <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white"> 
-                              {
-                                item.price ?
-                                <span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">{item.total} </span> 
-                                  :
-                                  ''
-                              }
-                              </div>
-                            </div>
-                        </li>
-                      ))
-                }
+            {selectedData.features.bag.map((item, index) => (
+              <li key={index} className="mt-4">
+                <div className="flex items-center space-x-4">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900 truncate dark:text-black">
+                      {item.key}
+                    </p>
+                    <p className="text-xs text-gray-500 truncate dark:text-gray-400">
+                      {item.value}
+                    </p>
+                  </div>
+                  {item.price && (
+                    <div className="inline-flex items-center">
+                      <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                        {item.total}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
           </ul>
+
+      
+          
       </div>
     </div>
   </div>

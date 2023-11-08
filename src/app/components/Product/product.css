@@ -9,6 +9,13 @@
   text-align: center;
 }
 
+
+.image-container {
+  width: 140px;
+  height: 140px;
+  overflow: hidden; /* Para recortar las imágenes si son más grandes */
+}
+
 /* Media query para dispositivos móviles */
 @media screen and (max-width: 768px) {
   .secure-container {

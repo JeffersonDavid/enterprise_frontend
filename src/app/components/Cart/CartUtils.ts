@@ -60,3 +60,13 @@ export function pushProductToCart( type: number ){
         //console.log('pushed to cart')
         //console.log(cart_)
 }
+
+
+export function mustShowCartDetails(props: CartContract): boolean {
+    if( (props.data.products_added).length > 0 ){
+        return true
+    }else{
+        return false
+    }
+
+}

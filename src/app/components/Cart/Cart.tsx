@@ -1,8 +1,9 @@
-
+'use client'
 import React from "react"
 import { CartContract } from './Contracts'
-import { securevalidation, checkLocalStorage } from './CartUtils'
+import { securevalidation, checkLocalStorage, mustShowCartDetails } from './CartUtils'
 import Link from "next/link";
+import { useEffect,  useState } from 'react';
 
 
 export default function CartComponent( props: CartContract) {
@@ -10,7 +11,13 @@ export default function CartComponent( props: CartContract) {
     const persistance = checkLocalStorage(props);
     const validation = securevalidation( props );
 
-    const showPage = (props.data.products_added.length > 0) ? true : false
+    const [cartsProps, setcartsProps] = useState( JSON.parse(localStorage.getItem('CartProps')));
+
+    const [showPage, setShowPage] = useState(false);
+
+    useEffect(() => {
+        setShowPage(mustShowCartDetails(cartsProps))
+      }, [cartsProps]); 
 
 
     let html = null;

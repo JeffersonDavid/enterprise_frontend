@@ -8,7 +8,7 @@ export default function ordersPage() {
 
     return( 
         
-            <div classNameName='product-box secure-container flex justify-center items-center' >  
+            <div className='product-box secure-container flex justify-center items-center' >  
             
                 <div className="product-container">
 

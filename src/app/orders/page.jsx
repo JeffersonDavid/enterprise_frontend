@@ -8,15 +8,15 @@ export default function ordersPage() {
 
     return( 
         
-            <div className='product-box secure-container flex justify-center items-center' >  
+            <div classNameName='product-box secure-container flex justify-center items-center' >  
             
-                <div class="product-container">
+                <div className="product-container">
 
-                    <div class="product p-f">
+                    <div className="product p-f">
                         <Product data={productData().pita_blanco}/>
                     </div>
 
-                    <div class="product ">
+                    <div className="product ">
                         <Product data={productData().pita_integral}/>
                     </div>
 

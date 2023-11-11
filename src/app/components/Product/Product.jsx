@@ -26,10 +26,14 @@ export default function Product(initialType) {
  
 
   useEffect(() => {
+
     setProduct_data(selectedData);
     setSilderImg(selectedData.img)
 
-  }, [productType]);
+    console.log(localStorage.getItem('shoppingCart'))
+    
+
+  }, [productType,shoppingCart]);
 
 
   const handleImg = (simage) => {
@@ -39,7 +43,8 @@ export default function Product(initialType) {
 
   const addTocart = () =>{
 
-    setShoppingCart([selectedData.type])
+   
+    localStorage.setItem("shoppingCart", selectedData.type);
 
   }
 

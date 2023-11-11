@@ -4,7 +4,7 @@ import Slider from '../app/components/Slider/Slider'
 export default function Home() {
   return (
 
-    <Slider></Slider>
+           <Slider></Slider>
 
   )
 }

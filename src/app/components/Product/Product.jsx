@@ -7,7 +7,7 @@ import dataset from './data'
 import CartComponent from '../Cart/Cart';
 import { useState, useEffect } from 'react';
 
-import CustomForm from '../../components/Form/Form'
+import { pushProductToCart } from '../Cart/CartUtils'
 
 export default function Product(initialType) {
 
@@ -25,8 +25,6 @@ export default function Product(initialType) {
 
     setProduct_data(selectedData);
     setSilderImg(selectedData.img)
-
-    console.log(localStorage.getItem('shoppingCart'))
     
 
   }, [productType,shoppingCart]);
@@ -39,8 +37,7 @@ export default function Product(initialType) {
 
   const addTocart = () =>{
 
-   
-    localStorage.setItem("shoppingCart", selectedData.type);
+    pushProductToCart(selectedData.type)
 
   }
 

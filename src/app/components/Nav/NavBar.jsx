@@ -11,6 +11,7 @@ import ComunincationIcon from "../../../../public/images/com.png"
 import BoxIcon from "../../../../public/images/box.png"
 import CompanyIcon from "../../../../public/images/panadero.png"
 import Close from "../../../../public/images/close.png"
+import CartComponent from '../Cart/Cart';
 
 
 
@@ -140,11 +141,10 @@ return (
                             <li key={2} className='drsignal'>
                               <Link href="/integral" className="block px-4 py-2 hover:bg-gray-100 drsignal" onClick={() => setmobile_menu_state(false)}>Integral</Link>
                             </li>
-                  
-                            <li key={2} className='drsignal border-t'>
-                              <Link href="/integral" className="drsignal block px-4 py-2 hover:bg-gray-100 gray-10" onClick={() => setmobile_menu_state(false)}>Mis pedidos</Link>
-                            </li>
 
+                            <li key={2} className='drsignal'>
+                                <CartComponent data={{ type_component: 'navLink', products_added: [] }} onClick={() => setmobile_menu_state(false)} />
+                            </li>
                           </ul>
                 </div>
         </div>

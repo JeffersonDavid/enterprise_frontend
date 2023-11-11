@@ -4,6 +4,7 @@
 import React from 'react';
 import Image from 'next/image';
 import dataset from './data'
+import CartComponent from '../Cart/Cart';
 import { useState, useEffect } from 'react';
 
 import CustomForm from '../../components/Form/Form'
@@ -14,14 +15,9 @@ export default function Product(initialType) {
 
   let type_ = initialType.type
   const [productType, setType] = useState(type_);
-
   const [product_data, setProduct_data] = useState( productType != 'blanco' ? d.integral : d.blanco );
-
   const selectedData = productType != 'blanco' ? d.integral : d.blanco;
-
   const [sliderImg, setSilderImg ] =   useState(selectedData.img) 
-
-
   const [shoppingCart, setShoppingCart ] =   useState([]) 
  
 
@@ -102,7 +98,7 @@ return (
           </svg>
         </button>
 
-        <a href="#" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ir al  pedido {'>>>'} </a>
+             <CartComponent data={{ type_component: 'simpleLink', products_added: [] }}/>
 
      </div>
 

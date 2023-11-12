@@ -11,50 +11,55 @@ import Image from "next/image";
 
 
 export default function CartComponent( props: CartContract) {
-
+    
     let html: ReactNode  = null;
 
-    //const selected_products: number[] = fetchCartProducts();
-    const [selected_products, setSelectedProducts] = useState<number[]>([]);
+    const [selected_products, setSelectedProducts] = useState(fetchCartProducts())
 
     const persistance = checkLocalStorage(props);
     const validation = securevalidation( props );
-    const [cartsProps, setcartsProps] = useState( JSON.parse(localStorage.getItem('CartProps')));
-    const [showPage, setShowPage] = useState(false);
+    const [showPage, setShowPage] = useState( mustShowCartDetails() ? true : false );
+
 
     useEffect(() => {
+        // Función que se ejecuta cuando cambia el almacenamiento local
+        const handleStorageChange = (event) => {
+          if (event.type === 'storageChange') {
 
-        const fetchedProducts: number[] = fetchCartProducts();
-        setSelectedProducts(fetchedProducts);
+             setSelectedProducts(fetchCartProducts())
 
-        setShowPage(mustShowCartDetails(cartsProps))
-      }, [cartsProps]); 
+             if(mustShowCartDetails()){
+                setShowPage(true)
+             }else{
+                setShowPage(false)
+             }
+
+          }
+        };
+    
+        window.addEventListener('storageChange', handleStorageChange);
+
+        return () => { window.removeEventListener('storageChange', handleStorageChange) };
+
+      }, []);
 
 
-      const removeItem = (type: number) => {
-
-        removeProductToCart(type)
-
-      }
+    const removeItem = (type: number) => { removeProductToCart(type) }
 
 
     switch (props.data.type_component) {
 
         case 'navLink':
-
             html =  <Link href="/my-orders" className="drsignal block px-4 py-2 hover:bg-gray-100 gray-10"> Mis pedidos</Link>
-           
         break;
 
         case 'page':
-
             if(showPage){
-
                 html =  <div className="h-screen w-screen flex items-center justify-center">
                             
 
                                     <form  className="mt-2 mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
-                                    <h2 className="text-2xl font-bold text-center text-gray-700 mb-1">Formaliza tu Pedido</h2>
+                                        <h2 className="text-2xl font-bold text-center text-gray-700 mb-1">Formaliza tu Pedido</h2>
                                             <div className="mb-1">
                                                 <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="username">
                                                     Nombre y Apellidos
@@ -71,7 +76,7 @@ export default function CartComponent( props: CartContract) {
 
                                             <div className="mb-1">
 
-                                                    <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="products">Productos añadidos :  </label>
+                                                    <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="products"> Productos añadidos :  </label>
 
 
                                                     { selected_products.map((type, index) => (
@@ -126,11 +131,8 @@ export default function CartComponent( props: CartContract) {
 
                                             <div className='flex'>
                                                 <button  name='submit' id='submit_btn' type='submit' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"> Confirmar pedido </button>
-                                            </div>
-
-                                                
+                                            </div>    
                                     </form>
-                           
                          </div>
 
             }else{
@@ -139,24 +141,20 @@ export default function CartComponent( props: CartContract) {
                             <div className="bg-white rounded-lg shadow-lg p-4">
                                     <h3>Actualmente no tiene nigún producto añadido al carrito</h3>
                                     <h3>  Puede consultar nuestros productos desde el siguiente enlace </h3>
-                                    <Link href="/orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ver a productos {'>>>'} </Link>
+                                    <Link href="/orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ir a productos {'>>>'} </Link>
                             </div>
                       </div>
-
             }
-
         break
-        case 'simpleLink':
 
-            if(showPage){
-                html = <Link href="/my-orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ver productos {'>>>'} </Link>
-            }
-          
-         
-        
+
+        case 'simpleLink':
+            if(showPage){ html = <Link href="/my-orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ver productos {'>>>'} </Link> }
+        break
+    
     }
 
-  return html
+    return html
     
 }
 

@@ -1,9 +1,6 @@
 
-
-
-import { CartContract } from './Contracts'
-
 'use client'
+import { CartContract } from './Contracts'
 
 const claveLocalStorage: string = 'CartProps';
 
@@ -36,6 +33,7 @@ export function checkLocalStorage( props: CartContract ){
 export function pushProductToCart( type: number ){
 
     const allowed_types: number[] = [1,2]
+
     if (!allowed_types.includes(type)) {throw new Error(`El tipo ${type} no es un valor permitido.`)}
     
     const cart_ = JSON.parse(localStorage.getItem(claveLocalStorage))
@@ -57,13 +55,16 @@ export function pushProductToCart( type: number ){
             }
 
         }
-        //console.log('pushed to cart')
-        //console.log(cart_)
+
+        const storageChangeEvent = new Event('storageChange', { bubbles: true });
+        window.dispatchEvent(storageChangeEvent);
+        console.log('pushed to cart')
+        console.log(cart_)
 }
 
 
-export function mustShowCartDetails(props: CartContract): boolean {
-    if( (props.data.products_added).length > 0 ){
+export function mustShowCartDetails(): boolean {
+    if( (fetchCartProducts()).length > 0 ){
         return true
     }else{
         return false
@@ -91,6 +92,12 @@ export function removeProductToCart( type: number ){
     cart.data.products_added = filteredProducts
     localStorage.removeItem(claveLocalStorage);
     localStorage.setItem( claveLocalStorage , JSON.stringify(cart));
+
+    const storageChangeEvent = new Event('storageChange', { bubbles: true });
+    window.dispatchEvent(storageChangeEvent);
+    console.log('removed from cart')
+    console.log(cart_)
+
 }
 
 

@@ -22,28 +22,15 @@ export default function Product(initialType) {
  
 
   useEffect(() => {
-
     setProduct_data(selectedData);
     setSilderImg(selectedData.img)
-    
-
   }, [productType,shoppingCart]);
 
 
-  const handleImg = (simage) => {
-    setSilderImg(simage)
-  };
+  const handleImg = (simage) => { setSilderImg(simage)};
 
-
-  const addTocart = () =>{
-
-    pushProductToCart(selectedData.type)
-
-  }
-
-
+  const addTocart = () =>{ pushProductToCart(selectedData.type) }
  
-
 
 return (
 

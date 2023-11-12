@@ -28,7 +28,7 @@ export default function CartComponent( props: CartContract) {
         setSelectedProducts(fetchedProducts);
 
         setShowPage(mustShowCartDetails(cartsProps))
-      }, [cartsProps,selected_products]); 
+      }, [cartsProps]); 
 
 
       const removeItem = (type: number) => {
@@ -83,7 +83,8 @@ export default function CartComponent( props: CartContract) {
                                                                         <label className=" inline-block px-2 py-1 text-xs font-semibold leading-none text-white bg-blue-700" htmlFor="products">
                                                                             - { type === 1 ? 'Pan pita blanco' : 'Pan pita integral ' }
                                                                             </label>
-                                                                            <button onClick={() => removeItem(type)}> <Image src={trashIcon} width={20} height={20} alt="Com" className=""/> </button>
+                                                                            <button   type="button"  onClick={() => removeItem(type)}> <Image src={trashIcon} width={20} height={20} alt="Com" className=""/> 
+                                                                            </button>
                                                                     </div>
 
                                                                     <div className="flex p-1">

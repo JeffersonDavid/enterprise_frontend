@@ -122,7 +122,7 @@ return (
                             <li className="link-navi">
                                   <Link href={element.source} className="block py-2 pl-3 pr-4 text-zinc-950 rounded md:bg-transparent md:p-0" onClick={() => setmobile_menu_state(false)} >{element.label}</Link>
                             </li>
-                            <div className="icon_flv" key={index}>
+                            <div className="icon_flv">
                                 {element.iconSrc}
                             </div>
                         </div>         
@@ -142,7 +142,7 @@ return (
                               <Link href="/integral" className="block px-4 py-2 hover:bg-gray-100 drsignal" onClick={() => setmobile_menu_state(false)}>Integral</Link>
                             </li>
 
-                            <li key={2} className='drsignal'>
+                            <li key={3} className='drsignal'>
                                 <CartComponent data={{ type_component: 'navLink', products_added: [] }} onClick={() => setmobile_menu_state(false)} />
                             </li>
                           </ul>

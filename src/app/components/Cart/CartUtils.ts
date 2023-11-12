@@ -70,3 +70,31 @@ export function mustShowCartDetails(props: CartContract): boolean {
     }
 
 }
+
+
+export function fetchCartProducts(): number[] {
+
+    const cart_ = JSON.parse(localStorage.getItem(claveLocalStorage))
+    let cart: CartContract = cart_
+    const products: number[] = cart.data.products_added
+
+    return products;
+}
+
+
+export function removeProductToCart( type: number ){
+
+    const allowed_types: number[] = [1,2]
+    if (!allowed_types.includes(type)) {throw new Error(`El tipo ${type} no es un valor permitido.`)}
+
+    const cart_ = JSON.parse(localStorage.getItem(claveLocalStorage))
+    let cart: CartContract = cart_
+
+    const filteredProducts = (cart.data.products_added).filter((product) => product !== type);
+
+    console.log('-------- elemento removido-------')
+
+
+}
+
+

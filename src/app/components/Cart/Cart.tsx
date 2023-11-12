@@ -2,25 +2,41 @@
 import React from "react"
 import { ReactNode } from 'react';
 import { CartContract } from './Contracts'
-import { securevalidation, checkLocalStorage, mustShowCartDetails } from './CartUtils'
+import { securevalidation, checkLocalStorage, mustShowCartDetails, fetchCartProducts , removeProductToCart} from './CartUtils'
 import Link from "next/link";
 import { useEffect,  useState } from 'react';
+
+import trashIcon from '../../../../public/images/trash-red-icon.png'
+import Image from "next/image";
 
 
 export default function CartComponent( props: CartContract) {
 
     let html: ReactNode  = null;
+
+    //const selected_products: number[] = fetchCartProducts();
+    const [selected_products, setSelectedProducts] = useState<number[]>([]);
+
     const persistance = checkLocalStorage(props);
     const validation = securevalidation( props );
     const [cartsProps, setcartsProps] = useState( JSON.parse(localStorage.getItem('CartProps')));
     const [showPage, setShowPage] = useState(false);
 
     useEffect(() => {
+
+        const fetchedProducts: number[] = fetchCartProducts();
+        setSelectedProducts(fetchedProducts);
+
         setShowPage(mustShowCartDetails(cartsProps))
-      }, [cartsProps]); 
+      }, [cartsProps,selected_products]); 
 
 
-    
+      const removeItem = (type: number) => {
+
+        removeProductToCart(type)
+
+      }
+
 
     switch (props.data.type_component) {
 
@@ -37,43 +53,79 @@ export default function CartComponent( props: CartContract) {
                 html =  <div className="h-screen w-screen flex items-center justify-center">
                             
 
-                                    <form  className="mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
+                                    <form  className="mt-2 mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
+                                    <h2 className="text-2xl font-bold text-center text-gray-700 mb-1">Formaliza tu Pedido</h2>
+                                            <div className="mb-1">
+                                                <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="username">
+                                                    Nombre y Apellidos
+                                                </label>
+                                                <input id="username" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"placeholder="introduce tu Nombre completo..." />
+                                            </div>
 
-                                        <div className="mb-4">
-                                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                                                Nombre y Apellidos
-                                            </label>
-                                            <input id="username" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"placeholder="introduce tu Nombre completo..." />
-                                        </div>
+                                            <div className="mb-1">
+                                                <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="email">
+                                                    Email
+                                                </label>
+                                                <input id="email" type="email" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="intruduce tu email..."/>
+                                            </div>
 
-                                        <div className="mb-4">
-                                            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                                Email
-                                            </label>
-                                            <input id="email" type="email" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="intruduce tu email..."/>
-                                        </div>
+                                            <div className="mb-1">
 
-                                        <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="products">Productos añadidos :  </label>
 
-                                                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="products">Productos añadidos : </label>
 
-                                                <div>
-                                                        <label className="ml-2 text-gray-700 text-sm font-bold w-full" htmlFor="products"> - Pita blanco </label>
+                                                    { selected_products.map((type, index) => (
+                                                     
+                                                            <div className="" key={index}>
 
-                                                        <div className="flex">
+                                                                    <div className="flex">
+                                                          
+                                                                        <label className=" inline-block px-2 py-1 text-xs font-semibold leading-none text-white bg-blue-700" htmlFor="products">
+                                                                            - { type === 1 ? 'Pan pita blanco' : 'Pan pita integral ' }
+                                                                            </label>
+                                                                            <button onClick={() => removeItem(type)}> <Image src={trashIcon} width={20} height={20} alt="Com" className=""/> </button>
+                                                                    </div>
 
-                                                            <label className="ml-4 text-gray-700 text-sm font-bold w-full" htmlFor="products">
-                                                                <span className="text-red-500">  * </span> Seleccione una cantidad: 
-                                                            </label>
+                                                                    <div className="flex p-1">
 
-                                                            <div className="flex">
-                                                                    <input id="products" type="number" className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder=""/>
+                                                                        <label className="ml-4 text-gray-700 text-sm font-bold mr-5 p-2">
+                                                                            <span className="text-red-500">  * </span> Confirme la cantidad (cajas):  
+                                                                        </label>
+
+                                                                        <div className="flex">
+                                                                                <input 
+                                                                                type="number" 
+                                                                                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                                                                min="1"
+                                                                                max="10"
+                                                                                defaultValue="1"
+                                                                                />
+                                                                        </div>
+                                                                    </div>
+
                                                             </div>
-                                                    </div>
 
-                                                </div>
-                                          
-                                        </div>
+                                                    ))}
+                                            
+                                            </div>
+
+                                            <div className="mb-1">
+                                                <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="email">
+                                                    Telefono
+                                                </label>
+                                                <input id="phone" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="intruduce tu telefono..."/>
+                                            </div>
+
+                                            <div className="mb-1">
+                                                <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="email">
+                                                    Direccion
+                                                </label>
+                                                <input id="phone" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Confirma tu dirección "/>
+                                            </div>
+
+                                            <div className='flex'>
+                                                <button  name='submit' id='submit_btn' type='submit' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"> Confirmar pedido </button>
+                                            </div>
 
                                                 
                                     </form>
@@ -96,7 +148,7 @@ export default function CartComponent( props: CartContract) {
         case 'simpleLink':
 
             if(showPage){
-                html = <Link href="/my-orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ver a productos {'>>>'} </Link>
+                html = <Link href="/my-orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ver productos {'>>>'} </Link>
             }
           
          

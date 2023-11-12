@@ -3,9 +3,8 @@
 
 import Sl1 from '../../../../public/images/sl1.jpg';
 import Sl2 from '../../../../public/images/sl2.jpg';
-import rarrow from '../../../../public/images/right-arrow.png';
-import larrow from '../../../../public/images/left-arrow.png';
-import {useEffect} from 'react'
+import rarrow from '../../../../public/images/proximo.png';
+import larrow from '../../../../public/images/proximo-2.png';
 import Image from 'next/image';
 import React from 'react'
 
@@ -41,36 +40,49 @@ export default function Slider()  {
     }
 
  
-return(<div className='secure-container flex justify-center items-center'> 
+return(
+    
+<div className='secure-container flex justify-center items-center'>
+  <div className='inline-block'>
 
-    <div className='inline-block'>
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-        <Image src={sliderData[position].img} alt='Pita blanco'></Image>
+    <div className="max-w-sm rounded overflow-hidden shadow-lg" style={{ width: '400px', height: '480px' }}>
+        <Image
+            src={sliderData[position].img}
+            alt='Pita blanco'
+            style={{ maxWidth: '100%', maxHeight: '100%', width: '100%', height: 'auto' }}/>
+
         <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{ sliderData[position].title }</div>
+            <div className="font-bold text-xl mb-2">{sliderData[position].title}</div>
             <p className="text-gray-700 text-base">
-            { sliderData[position].content }
+              {sliderData[position].content}
             </p>
         </div>
-        <div className="px-6 pt-4 pb-2">
-            {
-                sliderData[position].tags.map((item, index) => (
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{item}</span>
-                ))
-            }
+
+        <div className='justify-center items-center'>
+            {sliderData[position].tags.map((item, index) => (
+            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                #{item}
+            </span>
+            ))}
         </div>
+
     </div>
 
+    <div className="flex justify-center mt-4 sliderbtn">
+        <button
+            onClick={prev}
+            className="slb-l bg-gray-300 hover:bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-l">
+            <Image height={40} width={40} src={larrow} className='arrowb' />
+        </button>
 
-<div className="flex justify-center mt-4 sliderbtn"> {/* Usamos justify-center para centrar los botones horizontalmente */}
-      <button onClick={prev} className="slb-l bg-gray-300 hover:bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-l">
-      <Image height={40} width={40} src={larrow} className='arrowb' />
-      </button>
-      <button onClick={next} className="slb-r bg-gray-300 hover:bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-r">
-         <Image height={40} width={40} src={rarrow} className='arrowb' />
-      </button>
+        <button
+            onClick={next}
+            className="slb-r bg-gray-300 hover-bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-r">
+            <Image height={40} width={40} src={rarrow} className='arrowb' />
+        </button>
+
     </div>
-
+  </div>
 </div>
-      
-</div>)}
+
+)}

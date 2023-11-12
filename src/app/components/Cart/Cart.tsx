@@ -149,7 +149,7 @@ export default function CartComponent( props: CartContract) {
 
 
         case 'simpleLink':
-            if(showPage){ html = <Link href="/my-orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ver productos {'>>>'} </Link> }
+            if(showPage){ html = <Link href="/my-orders" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline"> ir al pedido {'>>>'} </Link> }
         break
     
     }

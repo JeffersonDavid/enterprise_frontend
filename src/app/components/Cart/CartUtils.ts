@@ -4,6 +4,7 @@ import { CartContract } from './Contracts'
 
 const claveLocalStorage: string = 'CartProps';
 
+
 export function securevalidation( props: CartContract) {
 
     const comp_type : string = props.data.type_component
@@ -31,7 +32,7 @@ export function checkLocalStorage( props: CartContract ){
 
 
 export function pushProductToCart( type: number ){
-
+    validateStorage()
     const allowed_types: number[] = [1,2]
 
     if (!allowed_types.includes(type)) {throw new Error(`El tipo ${type} no es un valor permitido.`)}
@@ -64,17 +65,14 @@ export function pushProductToCart( type: number ){
 
 
 export function mustShowCartDetails(): boolean {
-    if( (fetchCartProducts()).length > 0 ){
-        return true
-    }else{
-        return false
-    }
+
+    if( (fetchCartProducts()).length > 0 ){ return true }else{ return false }
 
 }
 
 
 export function fetchCartProducts(): number[] {
-
+    validateStorage()
     const cart_ = JSON.parse(localStorage.getItem(claveLocalStorage))
     let cart: CartContract = cart_
     const products: number[] = cart.data.products_added
@@ -84,6 +82,7 @@ export function fetchCartProducts(): number[] {
 
 
 export function removeProductToCart( type: number ){
+    validateStorage()
     const allowed_types: number[] = [1,2]
     if (!allowed_types.includes(type)) {throw new Error(`El tipo ${type} no es un valor permitido.`)}
     const cart_ = JSON.parse(localStorage.getItem(claveLocalStorage))
@@ -101,3 +100,11 @@ export function removeProductToCart( type: number ){
 }
 
 
+
+export function validateStorage(){
+
+    let stringProps: string = JSON.stringify({"data": { "type_component": "page","products_added": []}})
+    let savedItem: string | null = localStorage.getItem(claveLocalStorage)
+    if ( !savedItem ){ localStorage.setItem( claveLocalStorage , (stringProps)) }   
+
+}

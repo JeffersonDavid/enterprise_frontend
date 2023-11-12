@@ -29,11 +29,17 @@ export default function Product(initialType) {
 
   const handleImg = (simage) => { setSilderImg(simage)};
 
-  const addTocart = () =>{ pushProductToCart(selectedData.type) }
+  const addTocart = () =>{ 
+
+    pushProductToCart(selectedData.type)
+  
+
+  }
  
 
 return (
 
+  
 
 <div className='m-auto w-[100%]'>
 <div className='secure-container flex justify-center items-center'>

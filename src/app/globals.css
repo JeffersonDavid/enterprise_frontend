@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '../../public/css/normalize.css';
 @import '../app/components/Nav/navBar.css';
 @import '../app/components/Footer/footer.css';
 @import '../app/components/Product/product.css';

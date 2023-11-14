@@ -6,10 +6,15 @@ import Image from 'next/image';
 import dataset from './data'
 import CartComponent from '../Cart/Cart';
 import { useState, useEffect } from 'react';
+import PopUp from './../PopUps/information/info'
 
 import { pushProductToCart } from '../Cart/CartUtils'
 
 export default function Product(initialType) {
+
+  
+  
+
 
   const d = dataset();
 
@@ -31,6 +36,8 @@ export default function Product(initialType) {
 
   const addTocart = () =>{ 
 
+
+
     pushProductToCart(selectedData.type)
   
 
@@ -42,9 +49,14 @@ return (
   
 
 <div className='m-auto w-[100%]'>
+
+
+
+<PopUp data={{ status: true, title: 'Mensaje informativo', content: 'Producto añadido a su pedido, puede consultar su pedido desde.....' }} />
+
+
+
 <div className='secure-container flex justify-center items-center'>
-
-
 {
 
   <div className="flex product_desc_width_he border border-gray-300 rounded p-2 w-[70%] h-[65%]">

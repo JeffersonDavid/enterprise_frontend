@@ -8,8 +8,7 @@ export default function Product({ data }: { data: PopUpInfoContract }) {
 
     useEffect(() => {
         setShow(data.status);
-        console.log(show)
-      }, [data.status]);
+      }, [data]);
 
     
 

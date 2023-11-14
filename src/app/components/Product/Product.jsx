@@ -8,7 +8,7 @@ import CartComponent from '../Cart/Cart';
 import { useState, useEffect } from 'react';
 import PopUp from './../PopUps/information/info'
 
-import { pushProductToCart } from '../Cart/CartUtils'
+import { pushProductToCart,fetchCartProducts } from '../Cart/CartUtils'
 
 export default function Product(initialType) {
 
@@ -26,20 +26,47 @@ export default function Product(initialType) {
   const [shoppingCart, setShoppingCart ] =   useState([]) 
  
 
+  const filter = (fetchCartProducts()).filter(_type_ => _type_ !== selectedData.type);
+
+  const [popupInfo, setPopupInfo] = useState({
+    status: false,
+    title: '',
+    content: '',
+  });
+
+
   useEffect(() => {
+    
     setProduct_data(selectedData);
     setSilderImg(selectedData.img)
+
   }, [productType,shoppingCart]);
 
 
   const handleImg = (simage) => { setSilderImg(simage)};
 
-  const addTocart = () =>{ 
+  const addTocart = () =>{
 
+    if(!filter.length){
+
+            setPopupInfo({
+              status: true,
+              title: 'Mensaje informativo',
+              content: 'El producto ya ha sido añadido al carrito, puede consultar su pedido desde este....',
+            });
+
+      }else{
+
+            setPopupInfo({
+              status: true,
+              title: 'Mensaje informativo',
+              content: 'El producto ha añadido correctamente al pedido',
+            });
+
+      }
 
 
     pushProductToCart(selectedData.type)
-  
 
   }
  
@@ -52,7 +79,7 @@ return (
 
 
 
-<PopUp data={{ status: true, title: 'Mensaje informativo', content: 'Producto añadido a su pedido, puede consultar su pedido desde.....' }} />
+<PopUp data={popupInfo} />
 
 
 

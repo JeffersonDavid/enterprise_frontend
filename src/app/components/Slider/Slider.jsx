@@ -14,7 +14,7 @@ export default function Slider()  {
     let sliderData = [
 
         {
-            title:'Descubre nuevas fronteras culinarias con nuestro pita', img:Sl1 , content:'Descubre cómo transformar nuestro pita en auténticas obras maestras culinarias. Desde exquisitas opciones llenas de sabor hasta platos sorprendentes y saludables.', tags:['recetas','culinarias','mediterranea']
+            title:'Deeescubre nuevas fronteras culinarias con nuestro pita', img:Sl1 , content:'Descubre cómo transformar nuestro pita en auténticas obras maestras culinarias. Desde exquisitas opciones llenas de sabor hasta platos sorprendentes y saludables.', tags:['recetas','culinarias','mediterranea']
         }, 
 
         {
@@ -42,10 +42,9 @@ export default function Slider()  {
  
 return(
     
-<div className='secure-container flex justify-center items-center'>
-  <div className='inline-block'>
-
-    <div className="max-w-sm rounded overflow-hidden shadow-lg" style={{ width: '400px', height: '480px' }}>
+<div className=' secure-container flex justify-center items-center'>
+  <div className= 'slidesub inline-block'>
+    <div className="slide max-w-sm rounded overflow-hidden shadow-lg" style={{ width: '400px', height: '480px' }}>
         <Image
             src={sliderData[position].img}
             alt='Pita blanco'

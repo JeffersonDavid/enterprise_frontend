@@ -12,7 +12,7 @@ export default function ordersPage() {
             
                 <div className="product-container">
 
-                    <div className='prscontmb'>
+                    <div className='prscontmb flex'>
                         <div className="product p-f">
                             <Product data={productData().pita_blanco}/>
                         </div>

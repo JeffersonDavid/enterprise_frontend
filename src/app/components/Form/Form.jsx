@@ -145,26 +145,24 @@ export default function CustomForm(inputs) {
 
     return (
     <div className='w-full flex justify-center'>
-    <Captcha form ={inputDataset} formStatus={formStatus} />
+        <Captcha form ={inputDataset} formStatus={formStatus} />
+          <form ref={formRef} className="formcomp mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1 border">
 
-    <form ref={formRef} className="mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
-            <p className='m-3 block text-gray font-bold'> {inputs.data.form_title} </p>
-            {
-                    inputs.data.form_fields.map((item, index) =>(
+                          <p className='m-3 block text-gray font-bold'> {inputs.data.form_title} </p>
+                          {
+                                  inputs.data.form_fields.map((item, index) =>(
 
-                    <div className="mb-2 flex" key = {index} >
-                        { item.type != submit_id ?  <label className="clabel block text-gray-700 text-sm font-bold mb-2">{item.label}</label> : null }
-                        {defineInputType(item)}
-                    </div>
-            ))}
+                                  <div className="mb-2 flex" key = {index} >
+                                      { item.type != submit_id ?  <label className="clabel block text-gray-700 text-sm font-bold mb-2">{item.label}</label> : null }
+                                      {defineInputType(item)}
+                                  </div>
+                          ))}
 
-                    <div className='flex'>
-                        <button  onClick={e => submitForm(e)} name='submit' id='submit_btn' type='submit' className="btnbcolor inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">Enviar</button>
-
-                        <span ref={valiadtionRef} className="valiadtionRef ml-5 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Por favor, rellene los campos: {valiadtionMsg}</span>
-                    </div>
-    </form>
-
+                          <div className='flex'>
+                              <button  onClick={e => submitForm(e)} name='submit' id='submit_btn' type='submit' className="btnbcolor inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">Enviar</button>
+                              <span ref={valiadtionRef} className="valiadtionRef ml-5 text-red-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-50">Por favor, rellene los campos: {valiadtionMsg}</span>
+                          </div>
+          </form>
     </div>
 
 )}

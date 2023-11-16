@@ -151,6 +151,13 @@ body {
     .prscontmb{
       height: 600px;
       overflow: scroll;
+      display: block;
+    }
+
+    .formcomp{
+      margin-top: 40%;
+      padding: 8px !important;
+      max-width: 90%;
     }
 }
   

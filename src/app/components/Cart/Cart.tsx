@@ -58,7 +58,7 @@ export default function CartComponent( props: CartContract) {
                 html =  <div className="h-screen w-screen flex items-center justify-center">
                             
 
-                                    <form  className="mt-2 mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
+                                    <form  className="formcomp_p border mt-1 mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
                                         <h2 className="text-2xl font-bold text-center text-gray-700 mb-1">Formaliza tu Pedido</h2>
                                             <div className="mb-1">
                                                 <label className="block text-gray-700 text-sm font-bold mb-1" htmlFor="username">
@@ -129,8 +129,8 @@ export default function CartComponent( props: CartContract) {
                                                 <input id="phone" type="text" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Confirma tu dirección "/>
                                             </div>
 
-                                            <div className='flex'>
-                                                <button  name='submit' id='submit_btn' type='submit' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"> Confirmar pedido </button>
+                                            <div className='flex p-4'>
+                                                <button  name='submit' id='submit_btn' type='submit' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"> CONFIRMAR </button>
                                             </div>    
                                     </form>
                          </div>

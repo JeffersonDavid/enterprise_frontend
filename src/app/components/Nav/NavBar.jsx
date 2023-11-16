@@ -134,16 +134,16 @@ return (
                 <div ref={dropRef} id="dropdownNavbar" className=" drsignal z-10 hidden font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                           <ul className="py-2 text-sm text-gray-700 drsignal" aria-labelledby="dropdownLargeButton">
 
-                            <li key={1} className='drsignal'>
+                            <li key={1} className='drsignal border'>
                               <Link href="/blanco" className="drsignal block px-4 py-2 hover:bg-gray-100 border-gray-10 border-b" onClick={() => setmobile_menu_state(false)} >Blanco</Link>
                             </li>
                             
-                            <li key={2} className='drsignal'>
+                            <li key={2} className='drsignal border'>
                               <Link href="/integral" className="block px-4 py-2 hover:bg-gray-100 drsignal" onClick={() => setmobile_menu_state(false)}>Integral</Link>
                             </li>
 
-                            <li key={3} className='drsignal'>
-                                <CartComponent data={{ type_component: 'navLink', products_added: [] }} onClick={() => setmobile_menu_state(false)} />
+                            <li key={3} className='drsignal border'>
+                             <Link href="/my-orders" className="drsignal block px-4 py-2 hover:bg-gray-100 " onClick={() => setmobile_menu_state(false)}>  Mis pedidos</Link>
                             </li>
                           </ul>
                 </div>

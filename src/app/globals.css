@@ -121,8 +121,13 @@ body {
       margin-right: 5%;
 
     }
+
+    .mobileadpt{
+      overflow: auto !important;
+      height: 573px !important;
+    }
     
-    /*d87c6c61*/
+
    
 }
   

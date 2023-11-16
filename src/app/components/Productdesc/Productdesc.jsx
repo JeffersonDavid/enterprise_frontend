@@ -6,7 +6,8 @@ import Link from 'next/link';
 export default function Productdesc(props) {
 
 
-return(<div className="bg-white border border-gray-200 rounded-lg shadow pr-cont">
+return(
+<div className="bg-white border border-gray-200 rounded-lg shadow pr-cont">
     <a href="#">
         <div className='p-2 pr-img-cont'>{props.data.image} </div>
        

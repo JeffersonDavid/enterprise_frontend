@@ -127,6 +127,10 @@ body {
       height: 573px !important;
     }
     
+    .mobilelist{
+      overflow: scroll !important;
+      height: 150px;
+    }
 
    
 }

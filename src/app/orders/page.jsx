@@ -10,7 +10,7 @@ export default function ordersPage() {
         
             <div className='product-box secure-container flex justify-center items-center' >  
             
-                <div className="mobileadpt product-container">
+                <div className="product-container">
 
                     <div className="product p-f">
                         <Product data={productData().pita_blanco}/>

@@ -8,7 +8,11 @@ export default function Blanco() {
 
 return ( 
 
-    <Product type="blanco" />
+  
+    <div>
+        <Product type="blanco" />
+    </div>
+ 
     
 )
 

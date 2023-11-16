@@ -75,7 +75,7 @@ return (
 
   <div className='m-auto w-full h-full'>
         <PopUp data={popupInfo} />
-        <div className='hidden secure-container flex justify-center items-center'>
+        <div className='prpcview secure-container flex justify-center items-center'>
 
 
                 <div className="flex product_desc_width_he border border-gray-300 rounded p-2 w-[70%] h-[65%]">
@@ -171,26 +171,50 @@ return (
         </div>
 
 
-        <div className="w-full h-full absolute justify-center items-center">
+        <div className="hidden prmview w-full h-full absolute justify-center items-center">
 
                <div className="mt-[24%] p-3">
 
                      <div className='flex border'>
-                          <div className='justify-between items-center p-6'>
-                                  <div>
-                                    <Image src={sliderImg} alt="Imagen Hija 1" className=" bottomimgs rounded-lg" />
+                          <div className='justify-between items-center p-3'>
+
+                                  <div className='border m-1 p-2'>
+                                    <button onClick={() => handleImg(selectedData.box_img)}>
+                                       <Image src={selectedData.box_img} alt="Imagen Hija 1" className=" bottomimgs rounded-lg" />
+                                    </button>
                                   </div>
                                 
-                                  <div>
-                                    <Image src={sliderImg} alt="Imagen Hija 2" className="bottomimgs rounded-lg" />
+                                  <div className='border m-1 p-2'>
+                                     <button onClick={() => handleImg(selectedData.singe_pita_img)}>
+                                        <Image src={selectedData.singe_pita_img} alt="Imagen Hija 2" className="bottomimgs rounded-lg" />
+                                    </button>
                                   </div>
                                 
-                                  <div>
-                                    <Image src={sliderImg} alt="Imagen Hija 3" className=" bottomimgs rounded-lg" />
+                                  <div className='border m-1 p-2'>
+                                    <button onClick={() => handleImg(selectedData.img)}>
+                                    <Image src={selectedData.img} alt="Imagen Hija 3" className=" prsldmb rounded-lg" />
+                                    </button>
                                   </div>
                           </div>
+                          
                           <div className='m-auto'>
-                                <Image src={sliderImg} alt="Imagen Hija 1" className="m-auto rounded-lg w-[70%]" />
+                        
+                              <div className='grid'>
+                              <h1 className="font-bold text-gray-800 m-5"> Detalles del producto </h1>
+                                  
+                                <Image src={sliderImg} alt=" pan pita " className="principal_img_prv m-auto rounded-lg" />
+
+                                <button className=" m-4 btnbcolor inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" type="button" onClick={e => addTocart(e)}>
+                                    <p className='mr-1'>Añadir al pedido </p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-auto">
+                                      <circle cx="9" cy="21" r="1"/>
+                                      <circle cx="20" cy="21" r="1"/>
+                                      <path d="M21 15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8l2 5h5a2 2 0 0 1 2 2z"/>
+                                    </svg>
+                                </button>
+                                <CartComponent data={{ type_component: 'simpleLink', products_added: [] }}/>
+                              </div>
+
                           </div>
                      </div>  
 
@@ -229,7 +253,7 @@ return (
 
                             ))}
           
-                        </ul>
+                      </ul>
 
                 </div> 
         </div>

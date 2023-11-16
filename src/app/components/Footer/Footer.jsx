@@ -41,7 +41,7 @@ export default function NavBar() {
 
     return(
         <footer className="bg-white border border-gray-10 shadow">
-            <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+            <div className="footmb w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
 
             <span className="pcpolicy text-sm text-gray-500 sm:text-center">© 2023 <a href="https://flowbite.com/" className="hover:underline">Pitasol HUB </a>. All Rights Reserved.
             <a href="https://flowbite.com/" className="hover:underline"> Politica de privacidad </a>

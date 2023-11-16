@@ -12,12 +12,14 @@ export default function ordersPage() {
             
                 <div className="product-container">
 
-                    <div className="product p-f">
-                        <Product data={productData().pita_blanco}/>
-                    </div>
+                    <div className='prscontmb'>
+                        <div className="product p-f">
+                            <Product data={productData().pita_blanco}/>
+                        </div>
 
-                    <div className="product ">
-                        <Product data={productData().pita_integral}/>
+                        <div className="product ">
+                            <Product data={productData().pita_integral}/>
+                        </div>
                     </div>
 
                 </div>

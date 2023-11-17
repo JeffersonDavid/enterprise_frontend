@@ -65,26 +65,33 @@ return (
 
 <div>
 
-<Fetcher validForm = {form} captchastatus = {captchastatus } />
+  <Fetcher validForm = {form} captchastatus = {captchastatus } />
 
-<div ref={captchaRef} className="flex items-center m-auto w-2/5">
-    <span className="m-2 flex bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
-        Por favor seleccione llla imagen que más se parezca a <p className="ml-1 border-b border-blue-500">{target.label}</p>
-    </span>
-    <div className="flex flex-wrap justify-between border p-1 w-full">
-        {captchaImgs.map((fila, rowIndex) => (
-            <div className="border w-1/2 p-1" key={rowIndex}>
-              <button onClick={() => processCaptcha(fila)}>
-                  <Image src={fila.source} alt={`Imagen ${rowIndex}`} className="w-full h-full object-cover" />
-              </button>
-              
-            </div>
-        ))}
-    </div>
+  
+  <div ref={captchaRef} className=" captchmb flex items-center m-auto w-2/5">
+  <h2 className="text-2xl font-bold text-center text-gray-700 mb-1">Validación de seguridad (Captcha)</h2>
+      <span className="m-2 flex bg-blue-100 text-blue-800 text-md font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-100">
+          Por favor, seleccione la imagen que se más se asemeja a " {target.label} " <br></br>
+      </span>
 
-    <span style={{display:visibility}} className="m-2 bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-30">
-    imagen seleccionada incorrecta, por favor seleccione {target.label} </span>
-</div>
+    
+
+      <div className="flex flex-wrap justify-between border p-1 w-full">
+          {captchaImgs.map((fila, rowIndex) => (
+              <div className="border w-1/2 p-1" key={rowIndex}>
+                <button onClick={() => processCaptcha(fila)}>
+                    <Image src={fila.source} alt={`Imagen ${rowIndex}`} className="w-full h-full object-cover" />
+                </button>
+                
+              </div>
+          ))}
+      </div>
+
+      <span style={{display:visibility}} className="m-2 bg-red-100 text-red-100 text-md font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-700 dark:text-red-100">
+      La imagen seleccionada es incorrecta, por favor seleccione la imagen mas parecida a "" {target.label} "" </span>
+
+      
+  </div>
 
 </div>
 

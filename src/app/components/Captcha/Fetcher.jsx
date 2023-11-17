@@ -5,9 +5,12 @@
 import { useRef, useState , useEffect} from "react";
 import Loader from "../../../../public/images/spinner.gif"
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Fetcher(props) {
+
     const { validForm, captchastatus} = props;
+    const [requestError, setrequestError] = useState(false)
 
     console.log('validForm new fields')
     console.log(validForm)
@@ -47,8 +50,7 @@ export default function Fetcher(props) {
           body: JSON.stringify(data)
         };
 
-       // console.log('request options')
-       // console.log(requestOptions)
+    
        console.log('---------- auth from backend ------------')
        console.log(token)
         
@@ -56,7 +58,7 @@ export default function Fetcher(props) {
 
               const response = await fetch(url, requestOptions);
               if (!response.ok) {
-                throw new Error('- Error en la solicitud: ' + JSON.stringify(response));
+                throw new Error('Step 1 - Error en la solicitud del fetcher : ' + JSON.stringify(response));
               }
               
               console.log(response)
@@ -64,7 +66,9 @@ export default function Fetcher(props) {
               console.log('Respuesta recibida de backend:', responseData);
 
         } catch (error) {
-              console.error('Error:', error.message);
+
+              console.error('Api error detected in front (sending server form data ):', error.message);
+              setrequestError(true)
         }
     }
 
@@ -80,10 +84,11 @@ export default function Fetcher(props) {
       try {
 
             const response = await fetch(url, requestOptions);
-            if (!response.ok) {
-              throw new Error(' - Error en la solicitud : ' + JSON.stringify(errorResponse));
 
+            if (!response.ok) {
+              throw new Error('Step 3 - Error en la solicitud : ' + JSON.stringify(errorResponse));
             }      
+
             const responseData = await response.json();
             console.log('Respuesta AUTH:', responseData);
 
@@ -91,7 +96,8 @@ export default function Fetcher(props) {
 
       } catch (error) {
 
-            console.error('Error AUTH:', error.message);
+            console.error('Api error detected in front (getting token auth from api ):', error.message);
+            setrequestError(true)
       }
     }
 
@@ -102,10 +108,27 @@ export default function Fetcher(props) {
 
 return (
   
-    <div ref={fetcherRef} >
-        <div className="flex justify-center items-center mt-10">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
-        </div>
+
+
+    <div className="mbfetcher" ref={fetcherRef} >
+
+      {!requestError ? (
+
+          <div className="flex justify-center items-center mt-10">
+            <div className="mbfetcher animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-900"></div>
+            <span className="absolute">Enviando datos... por favor espere</span>
+          </div>
+
+           ) : <div className="block justify-center items-center p-3">
+                     <span>Upps :( ! Esto no debería ocurrir, se ha producido un error en la solicitud web, para reportar un porblema por favor contacte con adminsitrador al siguiente correo:</span>
+                    <br></br>
+                     <a href="mailto:pitasol.sl@hotmail.com" className="text-blue-500 hover:underline">pitasol.sl@hotmail.com</a>
+
+                     <br></br>
+                     <Link href="/" className=" ml-2 text-xs text-blue-600 dark:text-blue-500 hover:underline">  {'<<<<'}  volver atrás </Link>
+              </div>
+      }
+       
     </div>
    
 

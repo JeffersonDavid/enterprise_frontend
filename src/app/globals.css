@@ -66,7 +66,7 @@ body {
     }
 
     .slidesub{
-      margin-top: 30%;
+      margin-top: 40%;
     }
 
     .secure-container{
@@ -161,12 +161,20 @@ body {
     }
 
     .formcomp_p{
-      padding: 8px !important;
       max-width: 90%;
-      margin-top: 0px !important;
+      margin-top: 10% !important;
       padding: 5px !important;
+      height: 400px;
+      overflow: scroll;
       margin-bottom: 40px !important
+    }
 
+    .formcomp_p > div{
+      margin: 10px;
+    }
+
+    .formcomp_p > div > label{
+      margin: 3px;
     }
 
     .captchmb{
@@ -175,9 +183,26 @@ body {
     }
 
     .mbfetcher{
-
       margin-top: 180px;
     }
+
+    .mbbtnheart{
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .mbbtnheart:active {
+      transform: scale(1.5);
+    }
+
+    .slidesub{
+      height: 400px !important;
+      overflow: scroll !important;
+    }
+
+
 }
   
   
+
+

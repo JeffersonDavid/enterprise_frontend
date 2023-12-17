@@ -1,5 +1,6 @@
 'use client'
 import FormComponent from "../components/Form/Form"
+import { Suspense } from 'react'
 
 export default function contactPage() {
 
@@ -38,6 +39,7 @@ export default function contactPage() {
   };
 
 
+  
   return (
     <div className='product-box secure-container flex justify-center items-center' > 
           <FormComponent data={formData} />

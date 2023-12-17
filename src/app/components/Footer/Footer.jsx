@@ -52,13 +52,13 @@ export default function NavBar() {
                  <div className='flexmobilefooter'>
                     <li className='ftli flex inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-success-700 ring-1 ring-inset ring-success-700/10'>
                         <Image src={Phone} width={20} height={20} alt="Com" className=""/>
-                        <a href={"tel:"+phoneNumber} className="inline-block text-sm font-semibold text-gray-700 mr-4 ml-2">Llámanos al {phoneNumber}</a>
+                        <a href={"tel:"+phoneNumber} className="mbbtnheart inline-block text-sm font-semibold text-gray-700 mr-4 ml-2">Llámanos al {phoneNumber}</a>
                         
                     </li>
 
                     <li className='ftli flex inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-success-700 ring-1 ring-inset ring-success-700/10'>
                         <Image src={Ws} width={20} height={20} alt="Com"/>
-                        <a href="https://api.whatsapp.com/send/?phone=34674068438&text=Escribenos+tu+consulta+por+aqu%C3%AD...&type=phone_number&app_absent=0" target="_blank" className="inline-block text-sm font-semibold text-gray-700 mr-4 ml-2">Envíanos un Whatsapp </a>
+                        <a href=" mbbtnheart https://api.whatsapp.com/send/?phone=34674068438&text=Escribenos+tu+consulta+por+aqu%C3%AD...&type=phone_number&app_absent=0" target="_blank" className="inline-block text-sm font-semibold text-gray-700 mr-4 ml-2">Envíanos un Whatsapp </a>
                     </li>
                 </div>
             </ul>

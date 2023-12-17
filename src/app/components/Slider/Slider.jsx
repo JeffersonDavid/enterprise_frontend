@@ -59,7 +59,7 @@ return(
 
         <div className='justify-center items-center'>
             {sliderData[position].tags.map((item, index) => (
-            <span className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            <span key={index} className="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                 #{item}
             </span>
             ))}
@@ -70,13 +70,13 @@ return(
     <div className="flex justify-center mt-4 sliderbtn">
         <button
             onClick={prev}
-            className="slb-l bg-gray-300 hover:bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-l">
+            className="mbbtnheart slb-l bg-gray-300 hover:bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-l">
             <Image height={40} width={40} src={larrow} className='arrowb' />
         </button>
 
         <button
             onClick={next}
-            className="slb-r bg-gray-300 hover-bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-r">
+            className=" mbbtnheart slb-r bg-gray-300 hover-bg-gray-200 text-gray-500 font-bold py-1 px-1 rounded-r">
             <Image height={40} width={40} src={rarrow} className='arrowb' />
         </button>
 

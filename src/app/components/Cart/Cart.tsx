@@ -10,20 +10,52 @@ import trashIcon from '../../../../public/images/trash-red-icon.png'
 import Image from "next/image";
 import { Input } from "postcss";
 
-
+interface Order {
+    type: number;
+    quantity: number;
+  }
+  
 
 export default function CartComponent( props: CartContract) {
+
+    const [products_available , setproducts_available] = useState([
+        {type: 1, desc: 'Pan pita blanco' },
+        {type: 2, desc: 'Pan pita integral' },
+    ]) 
     
     let html: ReactNode  = null;
 
     const [selected_products, setSelectedProducts] = useState(fetchCartProducts())
 
+
     const persistance = checkLocalStorage(props);
     const validation = securevalidation( props );
     const [showPage, setShowPage] = useState( mustShowCartDetails() ? true : false );
+    const [cartData, setCartData] = useState<Order[]>([]);
+
+    const setSelectedCartData = (type: number, quantity: number = 1): void => {
+        const order: Order = { type, quantity };
+        const index = cartData.findIndex(order_ => order_.type === type);
+      
+        if (index === -1) {
+          // El elemento no existe, agregarlo al array
+          setCartData((prevCartData) => [...prevCartData, order]);
+        } else {
+          // El elemento existe, actualizar el array sin el elemento
+          setCartData((prevCartData) => [
+            ...prevCartData.slice(0, index),
+            ...prevCartData.slice(index + 1),
+          ]);
+        }
+    };
 
 
     useEffect(() => {
+        
+        selected_products.forEach(type => {
+            setSelectedCartData(type)
+        });
+
         // Función que se ejecuta cuando cambia el almacenamiento local
         const handleStorageChange = (event) => {
           if (event.type === 'storageChange') {
@@ -38,15 +70,50 @@ export default function CartComponent( props: CartContract) {
 
           }
         };
-    
-        window.addEventListener('storageChange', handleStorageChange);
 
+        window.addEventListener('storageChange', handleStorageChange);
         return () => { window.removeEventListener('storageChange', handleStorageChange) };
 
       }, []);
 
 
-    const removeItem = (type: number) => { removeProductToCart(type) }
+    const removeItem = (type: number): void => { removeProductToCart(type) }
+
+
+    const sendOrder = () : void => {
+        
+        console.log('sendnig cart......')
+        console.log(cartData)
+    }
+
+    const setSelectedProducts_ = ( type_: number) : void => {
+
+        const type: number = type_
+        
+        selected_products.forEach( type_to_filter => {
+
+           if ( type_to_filter != type ){
+                selected_products.push(type)
+                setSelectedProducts((selected_products) => [...selected_products, type]);
+            }
+        });
+
+      
+        /*
+        if (index === -1) {
+          // El elemento no existe, agregarlo al array
+          setCartData((prevCartData) => [...prevCartData, order]);
+        } else {
+          // El elemento existe, actualizar el array sin el elemento
+          setCartData((prevCartData) => [
+            ...prevCartData.slice(0, index),
+            ...prevCartData.slice(index + 1),
+          ]);
+        }
+        */
+
+    }
+
 
 
     switch (props.data.type_component) {
@@ -104,6 +171,7 @@ export default function CartComponent( props: CartContract) {
                                                                                     min="1"
                                                                                     max="10"
                                                                                     defaultValue="1"
+                                                                                    onChange={(e) => setSelectedCartData(type, e.target.value)}
                                                                                     />
                                                                             </div>
                                                                         </div>
@@ -113,15 +181,31 @@ export default function CartComponent( props: CartContract) {
                                                         ))}
                                             
                                                 </div>
+
                                                         <div className="ml-[15%]">  
-                                                            <div className="flex text-gray-700 text-sm font-bold mb-1 mt-10"> <svg class="h-6 w-6 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/> </svg> <span className="m-1">Añadir otros productos (opcional) </span> </div>
-                                                            <select id="productos" name="productos" className=" text-sm mt-3 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+                                                            <div className="flex text-gray-700 text-sm font-bold mb-1 mt-10"> 
+                                                                <span className="m-1">Añadir otros productos (opcional) </span> 
+                                                            </div>
+                                                            <div className="flex">
+                                                                <select onChange={(e) => setSelectedProducts_(e.target.value)} id="productos" name="productos" className=" text-sm mt-3 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+                                                                    {
+                                                                                                                                        
+                                                                    products_available.map((index) => (
+
+                                                                            <option  
+                                                                            value={index.type} 
+                                                                            className="text-sm">
+                                                                            { index.desc }
+                                                                            </option>
+
+                                                                        ))
+                                                                    }
+                                
+                                                                </select>
+                                                                <div className="p-4">
                                                                
-                                                                <option value="producto1" className="text-sm">Producto 1</option>
-                                                                <option value="producto1" className="text-sm">Producto 1</option>
-                                        
-                                                            </select>
-                                                        
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                   
                                                 
@@ -142,7 +226,7 @@ export default function CartComponent( props: CartContract) {
                                             </div>
 
                                             <div className='flex p-4'>
-                                                <button  name='submit' id='submit_btn' type='submit' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"> CONFIRMAR </button>
+                                                <button  name='submit' id='submit_btn' type='button' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" onClick={sendOrder}> CONFIRMAR </button>
                                             </div>    
                                     </form>
                          </div>

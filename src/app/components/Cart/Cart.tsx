@@ -33,13 +33,15 @@ export default function CartComponent( props: CartContract) {
     const [showPage, setShowPage] = useState( mustShowCartDetails() ? true : false );
     const [cartData, setCartData] = useState<Order[]>([]);
 
-    const setSelectedCartData = (type: number, quantity: number = 1): void => {
+    const setSelectedCartData = (type: number, quantity: number = 1 ): void => {
+
         const order: Order = { type, quantity };
-        const index = cartData.findIndex(order_ => order_.type === type);
+        const index: number = cartData.findIndex(order_ => order_.type === type);
       
-        if (index === -1) {
+        if ( index === -1 ) {
           // El elemento no existe, agregarlo al array
           setCartData((prevCartData) => [...prevCartData, order]);
+          
         } else {
           // El elemento existe, actualizar el array sin el elemento
           setCartData((prevCartData) => [
@@ -52,13 +54,19 @@ export default function CartComponent( props: CartContract) {
 
     useEffect(() => {
         
-        selected_products.forEach(type => {
+        console.log('actualizando carrito')
+        
+        /*
+        selected_products.map( type => {
             setSelectedCartData(type)
         });
+        */
 
         // Función que se ejecuta cuando cambia el almacenamiento local
         const handleStorageChange = (event) => {
           if (event.type === 'storageChange') {
+
+            /*
 
              setSelectedProducts(fetchCartProducts())
 
@@ -67,6 +75,7 @@ export default function CartComponent( props: CartContract) {
              }else{
                 setShowPage(false)
              }
+             */
 
           }
         };
@@ -86,33 +95,30 @@ export default function CartComponent( props: CartContract) {
         console.log(cartData)
     }
 
-    const setSelectedProducts_ = ( type_: number) : void => {
+    const setSelectedProducts_ = (type_: number): void => {
 
-        const type: number = type_
+        console.log('setSelectedProducts_...');
+        const type: number = type_;  
+        // Verificar si el tipo ya está presente en selected_products
+        if (!selected_products.includes(type)) {
+
+          console.log('producto no existe, añadimos');
+          console.log('type' + type);
         
-        selected_products.forEach( type_to_filter => {
+          console.log('en selected products');
+          console.log(selected_products);
 
-           if ( type_to_filter != type ){
-                selected_products.push(type)
-                setSelectedProducts((selected_products) => [...selected_products, type]);
-            }
-        });
+          const nuevoArray = [...selected_products, type];
 
-      
-        /*
-        if (index === -1) {
-          // El elemento no existe, agregarlo al array
-          setCartData((prevCartData) => [...prevCartData, order]);
+
+          setSelectedProducts(nuevoArray);
         } else {
-          // El elemento existe, actualizar el array sin el elemento
-          setCartData((prevCartData) => [
-            ...prevCartData.slice(0, index),
-            ...prevCartData.slice(index + 1),
-          ]);
-        }
-        */
 
-    }
+          console.log('producto ya existe, no añadimos');
+        }
+
+
+    };
 
 
 

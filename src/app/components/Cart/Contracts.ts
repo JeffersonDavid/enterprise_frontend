@@ -1,11 +1,17 @@
 
 
-export type CartContract = {
+export interface ProductCart {
+    type: number;
+    quantity: number;
+}
 
-    data : {
-        type_component: string
-        products_added: number[];
-    }
+export interface CartList {
+    products: ProductCart[];
 }
 
 
+
+export interface AlertInfo {
+    type: number;
+    quantity: number;
+}

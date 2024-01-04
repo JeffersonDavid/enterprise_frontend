@@ -7,6 +7,7 @@
 export default function Blanco() {
 
 return (
+    
     <Product type="integral" />
 )
 

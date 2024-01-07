@@ -7,24 +7,6 @@ import { ProductCart,CartList } from './Contracts'
 const claveLocalStorage: string = 'CartProps';
 
 
-export function securevalidation( ) {
-    /*
-
-    const comp_type : string = props.data.type_component
-
-    switch (comp_type) {
-        case 'navLink' : break;
-        case 'simpleLink' : break;
-        case 'page' : break;
-        default: throw new Error('El valor del tipo CartContract no es válido o no esta dentro de los tipos permitidos ' + props.data.type_component );
-      }
-      */
-   
-}
-
-
-
-export function checkLocalStorage( ){ }
 
 export function ValidateProductCart( product: ProductCart ) : void {
 
@@ -44,14 +26,18 @@ export function validateCartStorage() : void {
 
 export function pushProductToCart( product: ProductCart ) : void {
 
+    const storageChangeEvent = new Event('storageChange', { bubbles: true });
+
     validateCartStorage();
     ValidateProductCart( product )
+   
 
     let storageCarList: CartList  = JSON.parse( localStorage.getItem(claveLocalStorage) || 'null');
 
     if ( storageCarList.products.length === 0 ){
         let carlist : CartList = { products: [product] }
         localStorage.setItem( claveLocalStorage,  JSON.stringify(carlist));
+        window.dispatchEvent(storageChangeEvent);
         return 
     }
 
@@ -71,12 +57,14 @@ export function pushProductToCart( product: ProductCart ) : void {
 
            storageCarList.products[indiceDelProducto] = product
            localStorage.setItem( claveLocalStorage,  JSON.stringify(storageCarList));
+           window.dispatchEvent(storageChangeEvent);
             return
 
         }else{
             //console.log('el objeto no fue add aun')
             storageCarList.products.push(product)
             localStorage.setItem( claveLocalStorage,  JSON.stringify(storageCarList));
+            window.dispatchEvent(storageChangeEvent);
             return
         }
 
@@ -114,26 +102,31 @@ export function fetchCartProducts(): CartList {
 }
 
 
-export function removeProductToCart( product: ProductCart ){
-    /*
-    validateStorage()
-    const allowed_types: number[] = [1,2]
-    if (!allowed_types.includes(type)) {throw new Error(`El tipo ${type} no es un valor permitido.`)}
-    const cart_ = JSON.parse(localStorage.getItem(claveLocalStorage))
-    let cart: CartContract = cart_
-    const filteredProducts: number[] = (cart.data.products_added).filter((product) => product !== type);
-    cart.data.products_added = filteredProducts
-    localStorage.removeItem(claveLocalStorage);
-    localStorage.setItem( claveLocalStorage , JSON.stringify(cart));
+export function removeProductToCart( product: ProductCart ) : void {
 
+    let cartList :CartList = fetchCartProducts();
     const storageChangeEvent = new Event('storageChange', { bubbles: true });
+
+     // Usamos map para crear una nueva copia del array, pero podemos usar también el operador de propagación [...cartList]
+
+     const updated_list: ProductCart[] = cartList.products.filter(
+        producto => producto.type != product.type
+      );
+    
+    cartList.products = updated_list;
+
+    localStorage.setItem( claveLocalStorage,  JSON.stringify(cartList));
     window.dispatchEvent(storageChangeEvent);
-    console.log('removed from cart')
-    console.log(cart_)
-    */
 
 }
 
 
+export function fetchAvailableProducts() : CartList {
+    
+    let available_products :CartList = { 
+        products: [ {type: 1, quantity: 1}, {type: 2, quantity: 1} ]
+    }
 
+    return available_products;
+}
 

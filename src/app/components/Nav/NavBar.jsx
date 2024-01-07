@@ -11,7 +11,7 @@ import ComunincationIcon from "../../../../public/images/com.png"
 import BoxIcon from "../../../../public/images/box.png"
 import CompanyIcon from "../../../../public/images/panadero.png"
 import Close from "../../../../public/images/close.png"
-import CartComponent from '../Cart/Cart';
+import CartComponent from '../Cart/Cart_old';
 
 
 

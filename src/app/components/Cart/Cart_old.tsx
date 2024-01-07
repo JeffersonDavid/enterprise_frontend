@@ -1,13 +1,15 @@
+/*
 'use client'
 import React from "react"
 import { ReactNode } from 'react';
 import { ProductCart,CartList } from './Contracts'
-import { mustShowCartDetails, fetchCartProducts , removeProductToCart, fetchAvailableProducts,pushProductToCart } from './CartUtils'
-import trashIcon from '../../../../public/images/trash-red-icon.png'
-import Image from "next/image";
-
+import { securevalidation, checkLocalStorage, mustShowCartDetails, fetchCartProducts , removeProductToCart} from './CartUtils'
+import Link from "next/link";
 import { useEffect,  useState } from 'react';
 
+import trashIcon from '../../../../public/images/trash-red-icon.png'
+import Image from "next/image";
+import { Input } from "postcss";
 
 interface Order {
     type: number;
@@ -19,38 +21,34 @@ export default function CartComponent() {
 
     
     let html : ReactNode  = null;
+
     let cartList : CartList = fetchCartProducts();
-    let available_pr : CartList = fetchAvailableProducts();
+
     const [ selected_products ,  setSelectedProducts ] = useState( cartList )
-    const [products_available, ] = useState(available_pr)
 
-    const [showPage , setShowPage] = useState( mustShowCartDetails() ? true : false );
+    const [showPage, setShowPage] = useState( mustShowCartDetails() ? true : false );
 
-    
+
     useEffect(() => {
+        
+       
         // Función que se ejecuta cuando cambia el almacenamiento local
         const handleStorageChange = (event :any ) => {
           if (event.type === 'storageChange') {
-                setSelectedProducts(fetchCartProducts())
+
           }
         };
+
         window.addEventListener('storageChange', handleStorageChange);
+
         return () => { window.removeEventListener('storageChange', handleStorageChange) };
+
       }, []);
 
-  
-    const getProductByType = ( product : ProductCart ) => {  
-        return product.type === 1 ? 'Pan pita blanco' : 'Pan pita intergral'
-    };
-
-
-    const setSelectedProducts_ = ( product : ProductCart ) => { 
-        pushProductToCart( product )
-    };
-
-    const sendOrder = (simage:any) => {  console.log('test')};
-
+    setSelectedProducts_
+ 
     html =  <div className="h-screen w-screen flex items-center justify-center">
+
                     <form  className="formcomp_p border mt-1 mwcustom bg-white w-full shadow-md rounded px-8 pt-2 pb-2 mb-1">
                                 <h2 className="text-2xl font-bold text-center text-gray-700 m-10">Formaliza tu Pedido</h2>
                                             <div className="mb-1">
@@ -74,20 +72,18 @@ export default function CartComponent() {
                                                 <div>
                                                         <label className="block text-gray-700 text-sm font-bold mb-1 mt-2"> Productos añadidos :  </label>
 
-                                                        { selected_products.products.map( ( product: ProductCart, index ) => (
+                                                        { 
+                                                            /*
+                                                            selected_products.map((type, index) => (
+                                                        
+                                                                <div className="cnt" key={index}>
 
-                                                            <div className="cnt" key={index}>
-                                                                
-                                                                <div className="flex">
-                                                                            <span className ="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20"> * { product.type === 1 ? 'Pan pita blanco' : 'Pan pita integral ' } </span>
-                                                                            <button type="button"
-                                                                            onClick={ ()=> removeProductToCart( product ) }> 
-                                                                                   <Image src={trashIcon} width={20} height={20} alt="Com" className="mbbtnheart"/> 
-                                                                            </button>
-                                                                </div>
+                                                                        <div className="flex">
+                                                                            <span className ="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20"> * { type === 1 ? 'Pan pita blanco' : 'Pan pita integral ' } </span>
+                                                                            <button   type="button"  onClick={() => removeItem(type)}> <Image src={trashIcon} width={20} height={20} alt="Com" className="mbbtnheart"/> </button>
+                                                                        </div>
 
-                                                                
-                                                                <div className="flex p-1">
+                                                                        <div className="flex p-1">
                                                                             <label className="ml-4 text-gray-700 text-sm font-bold mr-5 p-2">
                                                                                 <span className="text-red-500">  * </span> Confirme la cantidad (cajas):  
                                                                             </label>
@@ -98,15 +94,17 @@ export default function CartComponent() {
                                                                                     min="1"
                                                                                     max="10"
                                                                                     defaultValue="1"
-                                                                                    
+                                                                                    onChange={(e) => setSelectedCartData(type, e.target.value)}
                                                                                     />
                                                                             </div>
-                                                                </div>
+                                                                        </div>
 
+                                                                </div>     
 
-                                                            </div>
-                                                        ))}
-
+                                                            ))
+                                                            
+                                                        }
+                                            
                                                  </div>
 
                                                         <div className="ml-[15%]">  
@@ -114,18 +112,26 @@ export default function CartComponent() {
                                                                 <span className="m-1">Añadir otros productos (opcional) </span> 
                                                             </div>
                                                             <div className="flex">
-                                                                <select onChange={(e) => setSelectedProducts_( JSON.parse(e.target.value))} id="productos" name="productos" className=" text-sm mt-3 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
-                                                                
+                                                                <select onChange={(e) => setSelectedProducts_(e.target.value)} id="productos" name="productos" className=" text-sm mt-3 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:border-blue-300">
+                                                                        
                                                                         {
-                                                                            products_available.products.map(  (product: ProductCart, index ) => (
-                                                                                    <option value={ JSON.stringify(product) } className="text-sm">
-                                                                                        { getProductByType(product) }
+                                                                            /*                                                            
+                                                                            products_available.map((index) => (
+
+                                                                                    <option  
+                                                                                    value={index.type} 
+                                                                                    className="text-sm">
+                                                                                    { index.desc }
                                                                                     </option>
-                                                                            ))
+
+                                                                                ))
+                                                                            
                                                                         }
 
                                                                 </select>
-                                                                <div className="p-4"></div>
+                                                                <div className="p-4">
+                                                               
+                                                                </div>
                                                             </div>
                                                         </div>
                                                   
@@ -147,12 +153,15 @@ export default function CartComponent() {
                                             </div>
 
                                             <div className='flex p-4'>
-                                                <button  name='submit' id='submit_btn' type='button' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" 
-                                                onClick={sendOrder}> CONFIRMAR </button>
+                                                <button  name='submit' id='submit_btn' type='button' className="mt-2 btnbcolor inline-flex items-center px-2 py-1 text-sm font-small text-center text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300" onClick={sendOrder}> CONFIRMAR </button>
                                             </div>    
                         </form>
                 </div>
+
+            
+    
     return html
     
 }
 
+*/

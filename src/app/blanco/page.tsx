@@ -10,7 +10,7 @@ return (
 
   
     <div>
-        <Product type="blanco" />
+          <Product type="blanco" />
     </div>
  
     
